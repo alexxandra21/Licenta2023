@@ -1,32 +1,57 @@
-method BancnoteMin(sum: int, n: int, bancnote: array<int>,sol: array<int>)
-modifies sol
-requires sum >= 0
+method maximRest(suma : int) returns(s : int)
+  requires suma > 0
+  ensures 0 < s <= suma
+  ensures s == 1 || s == 2 || s == 4 || s == 8 || s == 16
+  ensures s == 1 ==> suma < 5
+  ensures s == 2 ==> 2 <= suma < 10
+  ensures s == 4 ==> 4 <= suma < 20
+  ensures s == 8 ==> 8 <= suma < 50
+  ensures s == 16 ==> 16 <= suma
+
+predicate esteSolutieValida(solutie : seq<int>)
 {
-  /*
-  suma initiala, suma de dat ca rest care trebuie construita, 
-  rest=suma;
-  for(int i=0;i<n;i++)
-    {
-      while(rest>bancnote[i])
-      {
-        rest=rest-bancote[i];
-        sol[i]++;
-      }
-    }
-  */
+  |solutie| == 5 && solutie[0] >= 0 && solutie[1] >= 0 && solutie[2] >= 0 && solutie[3] >=0 && solutie[4] >=0
+}
+
+method bancnoteMin(sum: int)returns(sol: seq<int>)
+requires sum >=0 
+ensures esteSolutieValida(sol)
+{
    var rest:=sum;
-   var i:=0;
-   while i< n-1
-    invariant 0 <= i <=n-1
-    decreases n-i
+   var bancnota:=0;
+   var s1:=0;
+   var s2:=0;
+   var s4:=0;
+   var s8:=0;
+   var s16:=0;
+   while (0 < rest )
+    invariant 0<=rest<=sum
+    decreases rest
   {
-    while  bancnote[i]<rest
-    invariant 0 <= bancnote[i] <=rest
-    {
-      rest:=rest-bancnote[i];
-      sol[i]:=sol[i]+1;
-    }
-    i:=i+1;
+    //la fiecare iteratie se alege bancnota optima
+    // pentru a da rest apoi se modifica solutia
+    var s:=maximRest(rest);
+    if( s ==16)
+       { 
+        s16:=s16+1;
+       }
+    else if( s==8)
+       { 
+        s8:=s8+1;
+       }
+       else if( s==4)
+       { 
+        s4:=s4+1;
+       }
+       else if( s==2)
+       { 
+        s2:=s2+1;
+       } 
+       else 
+           { s1:=s+1;}
+    
+    sol := [s16, s8, s4, s2, s1];
+    rest:=rest-s;
   }   
 
 }
@@ -37,24 +62,17 @@ method Main ()
   var bancnote:=new int[5];
   bancnote[0],bancnote[1],bancnote[2],bancnote[3],bancnote[4]:=16,8,4,2,1;
   var n:=5; //dimensiunea secventei bancnote
-  var sol:=new int[5];
-  sol[0],sol[1],sol[2],sol[3],sol[4]:=0,0,0,0,0;
-  BancnoteMin(sum,n,bancnote,sol);
+  var sol := bancnoteMin(sum);
   print "Restul optim pentru suma data este = ";
-  var i:int :=0;
-  while i< n-1 
-    invariant 0 <= i<n
-    decreases n-i
-  {
-    while 0 < sol[i] 
-      invariant 0<=sol[i]<=sol[i]
-      decreases sol[i]
-      {
-        print sol[i];
-        print " ";
-        sol[i]:=sol[i]-1;
-      }
-    i:=i+1;
-  }
-  //ar trebui sa afiseze "16 16 8 4 2 1"
+  print "Nr bancnote de 16:";
+  print sol[0];
+  print "Nr bancnote de 8:";
+  print sol[1];
+  print "Nr bancnote de 4:";
+  print sol[2];
+  print "Nr bancnote de 2:";
+  print sol[3];
+  print "Nr bancnote de 1:";
+  print sol[4];
+  
 }
