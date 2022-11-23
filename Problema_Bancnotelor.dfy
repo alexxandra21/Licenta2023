@@ -2,10 +2,10 @@ method maximRest(suma : int) returns(s : int)
   requires suma > 0
   ensures 0 < s <= suma
   ensures s == 1 || s == 2 || s == 4 || s == 8 || s == 16
-  ensures s == 1 ==> suma < 5
-  ensures s == 2 ==> 2 <= suma < 10
-  ensures s == 4 ==> 4 <= suma < 20
-  ensures s == 8 ==> 8 <= suma < 50
+  ensures s == 1 ==> suma < 2
+  ensures s == 2 ==> 2 <= suma < 4
+  ensures s == 4 ==> 4 <= suma < 8
+  ensures s == 8 ==> 8 <= suma < 16
   ensures s == 16 ==> 16 <= suma
 
 predicate esteSolutieValida(solutie : seq<int>)
@@ -24,13 +24,14 @@ ensures esteSolutieValida(sol)
    var s4:=0;
    var s8:=0;
    var s16:=0;
-   while (0 < rest )
+   var s:=0;
+   while (0 <rest )
     invariant 0<=rest<=sum
     decreases rest
   {
     //la fiecare iteratie se alege bancnota optima
     // pentru a da rest apoi se modifica solutia
-    var s:=maximRest(rest);
+    s:=maximRest(rest);
     if( s ==16)
        { 
         s16:=s16+1;
