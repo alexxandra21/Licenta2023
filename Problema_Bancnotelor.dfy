@@ -49,11 +49,12 @@ ensures esteSolutieValida(sol)
         s2:=s2+1;
        } 
        else 
-           { s1:=s+1;}
-    
-    sol := [s16, s8, s4, s2, s1];
+           { s1:=s1+1;}
+ 
     rest:=rest-s;
-  }   
+  }
+     
+    sol := [s16, s8, s4, s2, s1];
 
 }
 
