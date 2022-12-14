@@ -355,6 +355,44 @@ requires 8<=rest < 16
   
   }
 
+lemma exchangeArgumentCaz16(rest: int, solutieCurenta:seq<int>)
+    requires 16<=rest 
+    requires esteSolutieValida(solutieCurenta)
+    requires esteSolutieOptima(solutieCurenta, rest-16)
+    ensures esteSolutieOptima(sumSolutii(solutieCurenta, [1,0,0,0,0]),rest)
+    {
+      assert esteSolutieCorecta(sumSolutii(solutieCurenta, [1,0,0,0,0]),rest);
+        if(!esteSolutieOptima(sumSolutii(solutieCurenta, [1,0,0,0,0]),rest))
+      {
+        var solutieOptima:| esteSolutieValida(solutieOptima) && esteSolutieCorecta(solutieOptima,rest)&&
+          cardinal(solutieOptima) < cardinal(sumSolutii(solutieCurenta,[1,0,0,0,0]));
+
+      assert cardinal(sumSolutii(solutieCurenta, [1,0,0,0,0])) == cardinal(solutieCurenta) + 1;
+      /*if(solutieOptima[1] >= 1)
+      {
+        var solutieOptima' := sumSolutii(solutieOptima, [0,-1,0,0,0]);
+        assert esteSolutieCorecta(solutieOptima', rest - 8);
+        assert cardinal(solutieOptima') == cardinal(solutieOptima) - 1;
+        assert cardinal(solutieOptima) - 1 < cardinal(solutieCurenta);
+        assert false;
+      }
+      else if(solutieOptima[2] >= 2)
+      {
+        var solutieOptima' :=sumSolutii(solutieOptima,[0,0,-2,0,0]);
+        assert esteSolutieCorecta(solutieOptima', rest - 8);
+        assert cardinal(solutieOptima') == cardinal(solutieOptima) - 2;
+        assert cardinal(solutieOptima) - 2 < cardinal(solutieCurenta);
+        assert false;
+      }
+      else{
+        assert false;
+      }
+      */
+
+    }
+
+}
+
 
 lemma cazMaxim16(rest: int, suma: int, solutieFinala: seq<int>)
 requires 16<=rest 
@@ -446,9 +484,6 @@ ensures esteSolutieOptima(sol,sum)
         s16:=s16+1;
         assert esteSolutieCorecta([s16, s8, s4, s2, s1], sum -rest+16); 
         assert INV(rest-16,sum,[s16, s8, s4, s2, s1]);
-        //bancnotele date pana acum adunate dau sum-rest curent +16 adaugat acum la bancnotele date
-        //ex: mai ai de dat 18 la  din suma totala de 50 , la pasul curent mai dai 16
-        //50-18+16=48 aveai s16=2, acum s-a facut s16=3 ,verifici cu predicatul ca 16 16 16 = 48  
        }
        
     rest:=rest-s;//restul de dat 
