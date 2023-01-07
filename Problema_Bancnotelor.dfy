@@ -1,12 +1,13 @@
-predicate esteSolutieValida(solutie : seq<int>)
-{
-  |solutie| == 5 && solutie[0] >= 0 && solutie[1] >= 0 && solutie[2] >= 0 && solutie[3] >=0 && solutie[4] >=0
-}
-
 predicate are5elem(solutie : seq<int>)
 {
   |solutie| == 5
 }
+
+predicate esteSolutieValida (solutie : seq<int>)
+{
+    are5elem(solutie) && solutie[0] >= 0 && solutie[1] >= 0 && solutie[2] >= 0 && solutie[3] >=0 && solutie[4] >=0 
+}
+
 
 function sumSolutii(s1 : seq<int>,s2 : seq<int>): seq<int>
 requires are5elem(s1)
@@ -80,10 +81,34 @@ method maximRest(suma : int) returns(s : int)
 
 
 lemma cazMaxim1(rest: int, suma: int, solutieFinala: seq<int>)
-  requires  rest == 1
+  requires  1<= rest<2
   requires esteSolutieValida(solutieFinala)
   requires INV(rest,suma, solutieFinala)
   ensures INV(rest-1, suma, sumSolutii(solutieFinala, [1,0,0,0,0]))
+ /* {
+
+  forall solutieCurenta | esteSolutieValida(solutieCurenta) && esteSolutieOptima(solutieCurenta, rest - 1) 
+          ensures esteSolutieOptima([solutieFinala[0] + solutieCurenta[0] + 1, solutieFinala[1] + solutieCurenta[1],
+          solutieFinala[2] + solutieCurenta[2], solutieFinala[3] + solutieCurenta[3], solutieFinala[4] + solutieCurenta[4]], suma)
+  {
+    assert esteSolutieCorecta(solutieCurenta, rest -1);
+    assert esteSolutieCorecta(sumSolutii(solutieCurenta,[1,0,0,0,0]),rest);
+
+    assert forall solutieOarecare :: esteSolutieValida(solutieOarecare) && esteSolutieCorecta(solutieOarecare, rest -1) 
+          ==> cardinal(solutieOarecare) >= cardinal(solutieCurenta);
+
+    assert esteSolutieCorecta(sumSolutii(sumSolutii(solutieCurenta,[1,0,0,0,0]),solutieFinala),suma);
+
+    assert forall solutieOarecare :: esteSolutieValida(solutieOarecare) && esteSolutieCorecta(solutieOarecare, suma) 
+          ==> cardinal(solutieOarecare) >= cardinal(sumSolutii(sumSolutii(solutieCurenta,[1,0,0,0,0]),solutieFinala));
+  
+  }
+
+  assert forall solutieCurenta :: esteSolutieValida(solutieCurenta) 
+          && esteSolutieOptima(solutieCurenta, rest - 1) ==> 
+          esteSolutieOptima(sumSolutii(solutieFinala,sumSolutii(solutieCurenta,[1,0,0,0,0])),suma);
+            
+}*/
 
 lemma cazMaxim2(rest: int, suma: int, solutieFinala: seq<int>)
   requires 2<=rest < 4
@@ -208,17 +233,25 @@ lemma cazMaxim8(rest: int, suma: int, solutieFinala: seq<int>)
   {
 
     forall solutieCurenta | esteSolutieValida(solutieCurenta)&& esteSolutieOptima(solutieCurenta,rest-8)
-       ensures esteSolutieOptima(sumSolutii(solutieCurenta,sumSolutii(solutieFinala, [0,1,0,0,0])), suma)
+       ensures esteSolutieOptima(sumSolutii(solutieCurenta,sumSolutii(solutieFinala, [0,0,0,1,0])), suma)
             {
-
             assert esteSolutieCorecta(solutieCurenta, rest - 8);
             assert esteSolutieCorecta(sumSolutii(solutieCurenta, [0,0,0,1,0]),rest);
             exchangeArgumentCaz8(rest, solutieCurenta);
- 
+            assert esteSolutieOptima([solutieCurenta[0], solutieCurenta[1], solutieCurenta[2], 1 + solutieCurenta[3], solutieCurenta[4]], rest);
+
+            assert forall solutieOarecare :: esteSolutieValida(solutieOarecare) && esteSolutieCorecta(solutieOarecare, rest - 20) 
+              ==> cardinal(solutieOarecare) >= cardinal(solutieCurenta);
+
+            assert esteSolutieCorecta(sumSolutii(sumSolutii(solutieFinala,solutieCurenta),[0,0,0,1,0]),suma);
+
+            assert forall solutieOarecare :: esteSolutieValida(solutieOarecare) && esteSolutieCorecta(solutieOarecare, suma)
+            ==> cardinal(solutieOarecare) >= cardinal(sumSolutii(solutieCurenta,sumSolutii(solutieFinala, [0,0,0,1,0])));
+              
             }
 
     assert forall solutieCurenta:: esteSolutieValida(solutieCurenta)&& esteSolutieOptima(solutieCurenta,rest-8)
-        ==> esteSolutieOptima(sumSolutii(solutieCurenta,sumSolutii(solutieFinala,[0,1,0,0,0])),suma);
+        ==> esteSolutieOptima(sumSolutii(solutieCurenta,sumSolutii(solutieFinala,[0,0,0,1,0])),suma);
 
   }
 
@@ -226,35 +259,43 @@ lemma exchangeArgumentCaz16(rest: int, solutieCurenta:seq<int>)
     requires 16<=rest 
     requires esteSolutieValida(solutieCurenta)
     requires esteSolutieOptima(solutieCurenta, rest-16)
-    ensures esteSolutieOptima(sumSolutii(solutieCurenta, [1,0,0,0,0]),rest)
+    ensures esteSolutieOptima(sumSolutii(solutieCurenta, [0,0,0,0,1]),rest)
     {
-      assert esteSolutieCorecta(sumSolutii(solutieCurenta, [1,0,0,0,0]),rest);
-        if(!esteSolutieOptima(sumSolutii(solutieCurenta, [1,0,0,0,0]),rest))
+      assert esteSolutieCorecta(sumSolutii(solutieCurenta, [0,0,0,0,1]),rest);
+        if(!esteSolutieOptima(sumSolutii(solutieCurenta, [0,0,0,0,1]),rest))
       {
         var solutieOptima:| esteSolutieValida(solutieOptima) && esteSolutieCorecta(solutieOptima,rest)&&
-          cardinal(solutieOptima) < cardinal(sumSolutii(solutieCurenta,[1,0,0,0,0]));
+          cardinal(solutieOptima) < cardinal(sumSolutii(solutieCurenta,[0,0,0,0,1]));
 
-      assert cardinal(sumSolutii(solutieCurenta, [1,0,0,0,0])) == cardinal(solutieCurenta) + 1;
-      /*if(solutieOptima[1] >= 1)
+      assert cardinal(sumSolutii(solutieCurenta, [0,0,0,0,1])) == cardinal(solutieCurenta) + 1;
+      if(solutieOptima[4] >= 1)
       {
-        var solutieOptima' := sumSolutii(solutieOptima, [0,-1,0,0,0]);
-        assert esteSolutieCorecta(solutieOptima', rest - 8);
+        var solutieOptima' := sumSolutii(solutieOptima, [0,0,0,0,-1]);
+        assert esteSolutieCorecta(solutieOptima', rest - 16);
         assert cardinal(solutieOptima') == cardinal(solutieOptima) - 1;
         assert cardinal(solutieOptima) - 1 < cardinal(solutieCurenta);
         assert false;
       }
-      else if(solutieOptima[2] >= 2)
+      else if(solutieOptima[3] >= 2)
       {
-        var solutieOptima' :=sumSolutii(solutieOptima,[0,0,-2,0,0]);
-        assert esteSolutieCorecta(solutieOptima', rest - 8);
+        var solutieOptima' :=sumSolutii(solutieOptima,[0,0,0,-2,0]);
+        assert esteSolutieCorecta(solutieOptima', rest - 16);
         assert cardinal(solutieOptima') == cardinal(solutieOptima) - 2;
         assert cardinal(solutieOptima) - 2 < cardinal(solutieCurenta);
+        assert false;
+      }
+      else if(solutieOptima[3] >= 1 && solutieOptima[2] >=2)
+      {
+        var solutieOptima' :=sumSolutii(solutieOptima,[0,0,-2,-1,0]);
+        assert esteSolutieCorecta(solutieOptima', rest - 16);
+        assert cardinal(solutieOptima') == cardinal(solutieOptima) - 3;
+        assert cardinal(solutieOptima) - 3 < cardinal(solutieCurenta);
         assert false;
       }
       else{
         assert false;
       }
-      */
+      
 
     }
 
@@ -265,31 +306,31 @@ lemma cazMaxim16(rest: int, suma: int, solutieFinala: seq<int>)
 requires 16<=rest 
   requires esteSolutieValida(solutieFinala)
   requires INV(rest,suma, solutieFinala)
-  ensures INV(rest-16, suma, sumSolutii(solutieFinala, [1,0,0,0,0]))
+  ensures INV(rest-16, suma, sumSolutii(solutieFinala, [0,0,0,0,1]))
   {
 
     forall solutieCurenta | esteSolutieValida(solutieCurenta) && esteSolutieOptima(solutieCurenta,rest-16)
-          ensures esteSolutieOptima(sumSolutii(sumSolutii(solutieCurenta,solutieFinala),[1,0,0,0,0]),suma)
+          ensures esteSolutieOptima(sumSolutii(sumSolutii(solutieCurenta,solutieFinala),[0,0,0,0,1]),suma)
     {
 
       assert esteSolutieCorecta(solutieCurenta,rest-16);
-      assert esteSolutieCorecta(sumSolutii(solutieCurenta,[1,0,0,0,0]),rest);
+      assert esteSolutieCorecta(sumSolutii(solutieCurenta,[0,0,0,0,1]),rest);
 
       exchangeArgumentCaz16(rest, solutieCurenta);
 
       assert forall solutie ::esteSolutieValida(solutie)&& esteSolutieCorecta(solutie, rest-16)
         ==>cardinal(solutie) >= cardinal(solutieCurenta);
 
-        assert esteSolutieCorecta(sumSolutii(sumSolutii(solutieCurenta,solutieFinala),[1,0,0,0,0]),suma);
+        assert esteSolutieCorecta(sumSolutii(sumSolutii(solutieCurenta,solutieFinala),[0,0,0,0,1]),suma);
 
 
         assert forall solutie :: esteSolutieValida(solutie)&&esteSolutieCorecta(solutie,suma)
-          ==> cardinal(solutie)>= cardinal(sumSolutii(sumSolutii(solutieCurenta,solutieFinala),[1,0,0,0,0]));
+          ==> cardinal(solutie)>= cardinal(sumSolutii(sumSolutii(solutieCurenta,solutieFinala),[0,0,0,0,1]));
     
     }
 
     assert forall solutieCurenta :: esteSolutieValida(solutieCurenta) && esteSolutieOptima(solutieCurenta,rest-16)
-           ==> esteSolutieOptima(sumSolutii(sumSolutii(solutieCurenta,solutieFinala),[1,0,0,0,0]),suma);
+           ==> esteSolutieOptima(sumSolutii(sumSolutii(solutieCurenta,solutieFinala),[0,0,0,0,1]),suma);
   
   }
 
@@ -363,9 +404,7 @@ ensures esteSolutieOptima(sol,sum)
 method Main () 
 {
   var sum:=49;
-  var bancnote:=new int[5];
-  bancnote[0],bancnote[1],bancnote[2],bancnote[3],bancnote[4]:=16,8,4,2,1;
-  var n:=5; //dimensiunea secventei bancnote
+  var bancnote:= [1,2,4,8,16];
   var sol := bancnoteMin(sum);
   print "Restul optim pentru suma ";
   print sum;
