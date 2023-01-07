@@ -269,7 +269,7 @@ lemma exchangeArgumentCaz16(rest: int, solutieCurenta:seq<int>)
 
       assert cardinal(sumSolutii(solutieCurenta, [0,0,0,0,1])) == cardinal(solutieCurenta) + 1;
       if(solutieOptima[4] >= 1)
-      {
+      { //16
         var solutieOptima' := sumSolutii(solutieOptima, [0,0,0,0,-1]);
         assert esteSolutieCorecta(solutieOptima', rest - 16);
         assert cardinal(solutieOptima') == cardinal(solutieOptima) - 1;
@@ -277,7 +277,7 @@ lemma exchangeArgumentCaz16(rest: int, solutieCurenta:seq<int>)
         assert false;
       }
       else if(solutieOptima[3] >= 2)
-      {
+      {//8 8
         var solutieOptima' :=sumSolutii(solutieOptima,[0,0,0,-2,0]);
         assert esteSolutieCorecta(solutieOptima', rest - 16);
         assert cardinal(solutieOptima') == cardinal(solutieOptima) - 2;
@@ -285,11 +285,91 @@ lemma exchangeArgumentCaz16(rest: int, solutieCurenta:seq<int>)
         assert false;
       }
       else if(solutieOptima[3] >= 1 && solutieOptima[2] >=2)
-      {
+      {//8 4 4
         var solutieOptima' :=sumSolutii(solutieOptima,[0,0,-2,-1,0]);
         assert esteSolutieCorecta(solutieOptima', rest - 16);
         assert cardinal(solutieOptima') == cardinal(solutieOptima) - 3;
         assert cardinal(solutieOptima) - 3 < cardinal(solutieCurenta);
+        assert false;
+      }
+      else if(solutieOptima[3] >= 1 && solutieOptima[2] >=1 && solutieOptima[1]>=2)
+      {//8 4 2 2
+        var solutieOptima' :=sumSolutii(solutieOptima,[0,-2,-1,-1,0]);
+        assert esteSolutieCorecta(solutieOptima', rest - 16);
+        assert cardinal(solutieOptima') == cardinal(solutieOptima) - 4;
+        assert cardinal(solutieOptima) - 4 < cardinal(solutieCurenta);
+        assert false;
+      }
+      else if(solutieOptima[3] >= 1 && solutieOptima[2] >=1 && solutieOptima[1]>=1 && solutieOptima[0]>=2)
+      {//8 4 2 1 1
+        var solutieOptima' :=sumSolutii(solutieOptima,[-2,-1,-1,-1,0]);
+        assert esteSolutieCorecta(solutieOptima', rest - 16);
+        assert cardinal(solutieOptima') == cardinal(solutieOptima) - 5;
+        assert cardinal(solutieOptima) - 5 < cardinal(solutieCurenta);
+        assert false;
+      }
+      else if(solutieOptima[3] >= 1 && solutieOptima[1]>=4 )
+      {//8 2 2 2 2
+        var solutieOptima' :=sumSolutii(solutieOptima,[0,-4,0,-1,0]);
+        assert esteSolutieCorecta(solutieOptima', rest - 16);
+        assert cardinal(solutieOptima') == cardinal(solutieOptima) - 5;
+        assert cardinal(solutieOptima) - 5 < cardinal(solutieCurenta);
+        assert false;
+      }
+      else if(solutieOptima[3] >= 1 && solutieOptima[1]>=3 && solutieOptima[0]>=2)
+      {//8 2 2 2 1 1 
+        var solutieOptima' :=sumSolutii(solutieOptima,[-2,-3,0,-1,0]);
+        assert esteSolutieCorecta(solutieOptima', rest - 16);
+        assert cardinal(solutieOptima') == cardinal(solutieOptima) - 6;
+        assert cardinal(solutieOptima) - 6 < cardinal(solutieCurenta);
+        assert false;
+      }
+      else if(solutieOptima[3] >= 1 && solutieOptima[2] >=1 && solutieOptima[0]>=4 )
+      {//8 4 1 1 1 1
+        var solutieOptima' :=sumSolutii(solutieOptima,[-4,0,-1,-1,0]);
+        assert esteSolutieCorecta(solutieOptima', rest - 16);
+        assert cardinal(solutieOptima') == cardinal(solutieOptima) - 6;
+        assert cardinal(solutieOptima) - 6 < cardinal(solutieCurenta);
+        assert false;
+      }
+      else if(solutieOptima[3] >= 1 && solutieOptima[1] >=2 && solutieOptima[0]>=4 )
+      {//8 2 2 1 1 1 1
+        var solutieOptima' :=sumSolutii(solutieOptima,[-4,-2,0,-1,0]);
+        assert esteSolutieCorecta(solutieOptima', rest - 16);
+        assert cardinal(solutieOptima') == cardinal(solutieOptima) - 7;
+        assert cardinal(solutieOptima) - 7 < cardinal(solutieCurenta);
+        assert false;
+      }
+      else if(solutieOptima[3] >= 1 && solutieOptima[1] >=1 && solutieOptima[0]>=6 )
+      {//8 2 1 1 1 1 1 1
+        var solutieOptima' :=sumSolutii(solutieOptima,[-6,-1,0,-1,0]);
+        assert esteSolutieCorecta(solutieOptima', rest - 16);
+        assert cardinal(solutieOptima') == cardinal(solutieOptima) - 8;
+        assert cardinal(solutieOptima) - 8 < cardinal(solutieCurenta);
+        assert false;
+      }
+      else if(solutieOptima[3] >= 1 && solutieOptima[0]>=8 )
+      {//8 1 1 1 1 1 1 1 1
+        var solutieOptima' :=sumSolutii(solutieOptima,[-8,0,0,-1,0]);
+        assert esteSolutieCorecta(solutieOptima', rest - 16);
+        assert cardinal(solutieOptima') == cardinal(solutieOptima) - 9;
+        assert cardinal(solutieOptima) - 9 < cardinal(solutieCurenta);
+        assert false;
+      }
+      else if(solutieOptima[2] >= 4  )
+      {//4 4 4 4
+        var solutieOptima' :=sumSolutii(solutieOptima,[0,0,-4,0,0]);
+        assert esteSolutieCorecta(solutieOptima', rest - 16);
+        assert cardinal(solutieOptima') == cardinal(solutieOptima) - 4;
+        assert cardinal(solutieOptima) - 4 < cardinal(solutieCurenta);
+        assert false;
+      }
+      else if(solutieOptima[3] >= 1 && solutieOptima[0]>=8 )
+      {//8 1 1 1 1 1 1 1 1
+        var solutieOptima' :=sumSolutii(solutieOptima,[-8,0,0,-1,0]);
+        assert esteSolutieCorecta(solutieOptima', rest - 16);
+        assert cardinal(solutieOptima') == cardinal(solutieOptima) - 9;
+        assert cardinal(solutieOptima) - 9 < cardinal(solutieCurenta);
         assert false;
       }
       else{
