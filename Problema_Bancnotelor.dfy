@@ -37,16 +37,22 @@ requires esteSolutieValida(solutie)
   cardinal(posibilaSolutie) >= cardinal(solutie)
 }
 
-predicate INV(rest : int, suma : int, solutiePrezent : seq<int>)
-  requires esteSolutieValida(solutiePrezent)
+predicate INV(rest : int, suma : int, x : seq<int>)
+  requires esteSolutieValida(x)
 {
-
-  forall solutie :: esteSolutieValida(solutie)==>
-        (esteSolutieCorecta(solutie,rest) ==>
-        esteSolutieCorecta(sumSolutii(solutie,solutiePrezent) ,suma) )
+  /* INV(rest, suma, x)
+    o solutie x valida 
+    fie o solutie y valida
+    daca y corecta petru rest atunci x+y corect pt suma
+    daca y este optima pentru rest atunci x+y valid pt suma
+    adica x e corect si optim pentru suma-rest
+  */
+  forall y :: esteSolutieValida(y)==>
+        (esteSolutieCorecta(y,rest) ==>
+        esteSolutieCorecta(sumSolutii(y,x) ,suma) )
         &&
-        ( esteSolutieOptima(solutiePrezent,rest)==>
-          esteSolutieOptima(sumSolutii(solutie,solutiePrezent),suma) )
+        ( esteSolutieOptima(y,rest)==>
+          esteSolutieOptima(sumSolutii(y,x),suma) )
 }
 
 method maximRest(suma : int) returns(s : int)
@@ -75,13 +81,13 @@ method maximRest(suma : int) returns(s : int)
      {
       s:=2;
      }
-     else if(suma<2) 
+     else if(suma < 2) 
      {  s:=1; }
   }
 
 
 lemma cazMaxim1(rest: int, suma: int, solutieFinala: seq<int>)
-  requires  1<= rest<2
+  requires  1 <= rest < 2
   requires esteSolutieValida(solutieFinala)
   requires INV(rest,suma, solutieFinala)
   ensures INV(rest-1, suma, sumSolutii(solutieFinala, [1,0,0,0,0]))
@@ -508,10 +514,10 @@ lemma exchangeArgumentCaz16(rest: int, solutieCurenta:seq<int>)
 }
 
 lemma cazMaxim16(rest: int, suma: int, solutieFinala: seq<int>)
-requires 16<=rest 
+requires 16 <=rest 
   requires esteSolutieValida(solutieFinala)
   requires INV(rest,suma, solutieFinala)
-  ensures INV(rest-16, suma, sumSolutii(solutieFinala, [0,0,0,0,1]))
+  ensures INV(rest - 16, suma, sumSolutii(solutieFinala, [0,0,0,0,1]))
   {
 
     forall solutieCurenta | esteSolutieValida(solutieCurenta) && esteSolutieOptima(solutieCurenta,rest-16)
@@ -553,7 +559,8 @@ ensures esteSolutieOptima(sol,sum)
    var s8:=0;
    var s16:=0;
    var s:=0;
-   while (0 <rest )
+
+   while (0 < rest )
     invariant 0<=rest<=sum
     invariant esteSolutieCorecta( [s1, s2, s4, s8, s16], sum - rest)
     invariant INV(rest,sum,[s1, s2, s4, s8, s16])
