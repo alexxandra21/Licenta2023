@@ -122,7 +122,7 @@ lemma exchangeArgumentCaz8(rest: int, solutieCurenta:seq<int>)
         if(!esteSolutieOptima(sumSolutii(solutieCurenta, [0,0,0,1,0,0]),rest))
       {
         var solutieOptima:| esteSolutieValida(solutieOptima) && esteSolutieCorecta(solutieOptima,rest)&&
-          cardinal(solutieOptima) < cardinal(sumSolutii(solutieCurenta, [0,1,0,0,0,0]));
+          cardinal(solutieOptima) < cardinal(sumSolutii(solutieCurenta, [0,0,0,1,0,0]));
 
       assert cardinal(sumSolutii(solutieCurenta, [0,0,0,1,0,0])) == cardinal(solutieCurenta) + 1;
       //assert solutieOptima[4] == 0;
@@ -248,7 +248,7 @@ lemma exchangeArgumentCaz16(rest: int, solutieCurenta:seq<int>)
     requires esteSolutieValida(solutieCurenta)
     requires esteSolutieOptima(solutieCurenta, rest-16)
     ensures esteSolutieOptima(sumSolutii(solutieCurenta, [0,0,0,0,1,0]),rest)
-    {
+{
       assert esteSolutieCorecta(sumSolutii(solutieCurenta, [0,0,0,0,1,0]),rest);
         if(!esteSolutieOptima(sumSolutii(solutieCurenta, [0,0,0,0,1,0]),rest))
       {
@@ -549,41 +549,83 @@ lemma cazMaxim16(rest: int, suma: int, solutieFinala: seq<int>)
   
   }
 
-lemma exchangeArgumentCaz32(rest: int, solutieCurenta:seq<int>)
+lemma exchangeArgumentCaz32(rest: int,suma: int,solutieOarecare: seq<int>, solutieCurenta:seq<int>)
     requires 32<=rest 
     requires esteSolutieValida(solutieCurenta)
     requires esteSolutieOptima(solutieCurenta, rest-32)
     ensures esteSolutieOptima(sumSolutii(solutieCurenta, [0,0,0,0,0,1]),rest)
+
+    
  
+lemma solutieCurentaAreCostMin(rest : int, suma : int, solutie : seq<int>)
+requires esteSolutieValida(solutie)
+  requires rest >= 32
+  requires esteSolutieCorecta(solutie, rest - 32)
+  requires esteSolutieOptima(solutie, rest - 32)
+  ensures esteSolutieOptima(sumSolutii(solutie,[0,0,0,0,0,1]),rest)
+{
+  forall solutieOarecare | esteSolutieValida(solutieOarecare) && esteSolutieCorecta(solutieOarecare, rest)
+    ensures cardinal(solutieOarecare) >= cardinal(sumSolutii(solutie,[0,0,0,0,0,1]))
+  {
+    exchangeArgumentCaz32(rest, suma, solutieOarecare, solutie);
+  }
+  
+}
+
+lemma solutieFinalaAreCostMinim(rest:int, suma :int, solutieOarecare : seq<int>, solutieFinala: seq<int>, solutieCurenta: seq<int>)
+  requires esteSolutieValida(solutieOarecare)
+  requires esteSolutieValida(solutieFinala)
+  requires esteSolutieValida(solutieCurenta)
+  requires rest>=32
+  requires esteSolutieOptima(solutieCurenta, rest - 32)
+  requires esteSolutieCorecta(sumSolutii(sumSolutii(solutieFinala,solutieCurenta),[0,0,0,0,0,1]),suma)
+  requires esteSolutieCorecta(solutieOarecare, suma)
+  requires INV(rest, suma, solutieFinala)
+  ensures cardinal(solutieOarecare) >= cardinal(sumSolutii(sumSolutii(solutieFinala,solutieCurenta),[0,0,0,0,0,1]))
+{
+  solutieCurentaAreCostMin(rest, suma, solutieCurenta);
+}
     
 
 lemma cazMaxim32(rest: int, suma: int, solutieFinala: seq<int>)
-  requires 32 <= rest 
+  requires rest >=32
   requires esteSolutieValida(solutieFinala)
   requires INV(rest, suma, solutieFinala)
   ensures INV(rest - 32, suma, sumSolutii(solutieFinala, [0,0,0,0,0,1]))
 {
-   forall solutieCurenta | esteSolutieValida(solutieCurenta) && esteSolutieOptima(solutieCurenta,rest-32)
-          ensures esteSolutieOptima(sumSolutii(sumSolutii(solutieCurenta,solutieFinala),[0,0,0,0,0,1]),suma)
-    {
+  assert forall solutieCurenta :: esteSolutieValida(solutieCurenta) ==>
+          (esteSolutieCorecta(solutieCurenta, rest) ==> 
+          esteSolutieCorecta(sumSolutii(solutieFinala,solutieCurenta),suma));
 
-      assert esteSolutieCorecta(solutieCurenta, rest-32);
-      assert esteSolutieCorecta(sumSolutii(solutieCurenta,[0,0,0,0,0,1]),rest);
+   forall solutieCurenta | esteSolutieValida(solutieCurenta) 
+          && esteSolutieCorecta(solutieCurenta, rest - 32) 
+          ensures esteSolutieCorecta(sumSolutii(sumSolutii(solutieFinala,solutieCurenta),[0,0,0,0,0,1]),suma)
+   {
+     assert esteSolutieCorecta(sumSolutii(solutieCurenta,[0,0,0,0,0,1]), rest);
+   }
+      
+  forall solutieCurenta | esteSolutieValida(solutieCurenta) 
+          && esteSolutieOptima(solutieCurenta, rest - 32) 
+          ensures esteSolutieOptima(sumSolutii(sumSolutii(solutieFinala,solutieCurenta),[0,0,0,0,0,1]),suma)
+  {
 
-       exchangeArgumentCaz32(rest, solutieCurenta);
+    assert esteSolutieCorecta(solutieCurenta, rest - 32);
+    assert esteSolutieCorecta(sumSolutii(solutieCurenta,[0,0,0,0,0,1]), rest);
+    //assert esteSolutieCorecta(sumSolutii(sumSolutii(solutieCurenta,solutieFinala),[0,0,0,0,0,1]),suma);
 
-      assert forall solutie ::esteSolutieValida(solutie)&& esteSolutieCorecta(solutie, rest-32)
-        ==>cardinal(solutie) >= cardinal(solutieCurenta);
-
-        assert esteSolutieCorecta(sumSolutii(sumSolutii(solutieCurenta,solutieFinala),[0,0,0,0,0,1]),suma);
-
-        assert forall solutie :: esteSolutieValida(solutie)&&esteSolutieCorecta(solutie,suma)
-          ==> cardinal(solutie)>= cardinal(sumSolutii(sumSolutii(solutieCurenta,solutieFinala),[0,0,0,0,0,1]));
+    assert forall solutieOarecare :: esteSolutieValida(solutieOarecare)
+          && esteSolutieCorecta(solutieOarecare, rest - 32) 
+          ==> cardinal(solutieOarecare) >= cardinal(solutieCurenta);
     
-    }
+    forall solutieOarecare | esteSolutieValida(solutieOarecare)
+                 && esteSolutieCorecta(solutieOarecare, suma)
+      ensures cardinal(solutieOarecare) >= cardinal(sumSolutii(sumSolutii(solutieFinala,solutieCurenta),[0,0,0,0,0,1]))
+      {
+          solutieFinalaAreCostMinim(rest, suma, solutieOarecare, solutieFinala, solutieCurenta);
+      }
 
-    assert forall solutieCurenta :: esteSolutieValida(solutieCurenta) && esteSolutieOptima(solutieCurenta,rest-32)
-           ==> esteSolutieOptima(sumSolutii(sumSolutii(solutieCurenta,solutieFinala),[0,0,0,0,0,1]),suma);
+  }
+
 }
 
 
