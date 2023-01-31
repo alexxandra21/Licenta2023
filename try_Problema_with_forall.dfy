@@ -138,11 +138,12 @@ lemma cazMaxim4(rest: int, suma: int, solutieFinala: seq<int>)
   requires INV(rest,suma, solutieFinala)
   ensures INV(rest-4, suma, sumSolutii(solutieFinala, [0,0,1,0,0,0]))
 
-predicate invExcArg(solutieOptima: seq<int>, i: int)
+predicate invExcArg(solutieOptima: seq<int>, i: int, j: int )
 requires 0<= i < 5
 requires esteSolutieValida(solutieOptima)
 {
-  0<=i<=4 && solutieOptima[i]<=1     
+  0<=i<=4 && 0<=j<=4 && forall x :: i<=x<=j ==> solutieOptima[x]<1
+  
 }
 
 predicate indexSmallerThan(solutieOptima: seq<int>, i: int, value: int)
@@ -180,11 +181,15 @@ lemma exchangeArgumentCaz8(rest: int, solutieCurenta:seq<int>)
       { //nu avem 8 in solutie optima
         //asiguram ca nu avem mai mult de un 1 , un 2 si un 4 in secventa 
         var i:=3;
+        var j:=3;
+        assert invExcArg(solutieOptima,i,j);
         while ( 0 < i )
         invariant  0 <= i <= 3
-        invariant invExcArg(solutieOptima,i)
+        invariant 0<=j<=3
+        invariant invExcArg(solutieOptima,i,j)
         {
-          i:=i-1;
+          if(i-1>=0)
+          {i:=i-1;
           assert esteSolutieOptima(solutieOptima,rest);
           if(solutieOptima[i]>1)
           {
@@ -208,19 +213,18 @@ lemma exchangeArgumentCaz8(rest: int, solutieCurenta:seq<int>)
             assert cardinal(solutieOptima') < cardinal(solutieOptima);
             assert false;
           }
-          
-          assert solutieOptima[i]<=1;
-          assert invExcArg(solutieOptima,i);      
+          assert solutieOptima[i]<=1;     
         }
-        assert invExcArg(solutieOptima,3);
-        assert invExcArg(solutieOptima,2);
-        assert invExcArg(solutieOptima,1);
-        assert invExcArg(solutieOptima,0);
+        assert invExcArg(solutieOptima,3,3);
+        assert invExcArg(solutieOptima,2,3);
+        assert invExcArg(solutieOptima,1,3);
+        assert invExcArg(solutieOptima,0,3);
         assert suma(solutieOptima)<=7;
         assert rest>=8;
         assert suma(solutieOptima)<rest;
-        assert esteSolutieOptima(solutieOptima);
+        assert esteSolutieOptima(solutieOptima,rest);
         assert false;
+        }
       } 
     }
   }
