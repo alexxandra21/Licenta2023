@@ -646,7 +646,7 @@ ensures esteSolutieOptima(sol,sum)
    var s:=0;
 
    while (0 < rest )
-    invariant 0<=rest<=sum
+    invariant 0 <= rest<=sum
     invariant esteSolutieCorecta( [s1, s2, s4, s8, s16, s32], sum - rest)
     invariant INV(rest,sum,[s1, s2, s4, s8, s16, s32])
     decreases rest
