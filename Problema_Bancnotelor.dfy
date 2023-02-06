@@ -544,7 +544,6 @@ ensures esteSolutieOptima(sol,sum)
     invariant 0<=rest<=sum
     invariant esteSolutieCorecta( [s1, s2, s4, s8, s16, s32], sum - rest)
     invariant INV(rest,sum,[s1, s2, s4, s8, s16, s32])
-    //invariant esteSolutieOptima([s1, s2, s4, s8, s16, s32],sum-rest)
     decreases rest
   {
     //la fiecare iteratie se alege bancnota optima
