@@ -470,7 +470,7 @@ ensures isOptimalSolution(solution, sum)
 
 method Main () 
 {
-  var sum:=81;
+  var sum := 81;
   var solution := banknoteMinimum(sum);
   print "Optimum rest for ";
   print sum;
@@ -487,5 +487,4 @@ method Main ()
   print solution[4];
   print "\n Banknotes of 32: ";
   print solution[5];
-  
 }
