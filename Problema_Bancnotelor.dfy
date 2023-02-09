@@ -28,7 +28,7 @@ predicate isValidSolution (solution: seq<int>)
     hasSixElem(solution) && solution[0] >= 0 && solution[1] >= 0 && solution[2] >= 0 && solution[3] >=0 && solution[4] >=0 && solution[5] >=0
 }
 
-function solutionsSum(banknote1: seq<int>, banknote2: seq<int>): seq<int>
+function method solutionsSum(banknote1: seq<int>, banknote2: seq<int>): seq<int>
   requires hasSixElem(banknote1)
   requires hasSixElem(banknote2)
 {
@@ -45,7 +45,7 @@ function solutionElementsSum(solution: seq<int>): int
 predicate isSolution(solution: seq<int>, sum: int)
   requires isValidSolution(solution)
 {
-   solutionElementsSum(solution) == sum
+   solutionElementsSum(solution) == sum 
 }
 
 function cost(solution: seq<int>): int
@@ -78,41 +78,28 @@ predicate addOptimRestEqualsOptimSum(rest: int, sum: int, x: seq<int>)
 
 }
 
-method maxRest(sum: int) returns(banknote: int)
+method maxBanknote(sum: int) returns(index: int)
   requires sum > 0
-  ensures 0 < banknote <= sum
-  ensures banknote == 1 || banknote == 2 || banknote == 4 || banknote == 8 || banknote == 16 || banknote == 32
-  ensures banknote == 1 ==> sum < 2
-  ensures banknote == 2 ==> 2 <= sum < 4
-  ensures banknote == 4 ==> 4 <= sum < 8
-  ensures banknote == 8 ==> 8 <= sum < 16
-  ensures banknote == 16 ==> 16 <= sum <32
-  ensures banknote == 32 ==> 32 <= sum
+  ensures 0 <= index <=5
+  ensures 0 <= power(2,index) <= sum
+  ensures (index!=5 &&  power(2,index+1) > sum) || index==5
 {
-    if(sum >= 32)
+  index:=5;
+  if(power(2,index)>sum)
+  {
+    assert power(2,index+1)>sum;
+     while( power(2,index)>sum && index > 0)
+      invariant power(2,index+1)>sum
     {
-      banknote:=32;
+      index:=index-1;
+      assert power(2,index+1)>sum;
     }
-    else if( sum >=16)
-    {
-      banknote:=16;
-    }
-     else if( sum >=8)
-    {
-      banknote:=8;
-    }
-    else if( sum >=4)
-    {
-      banknote:=4;
-    }
-    else if( sum>=2)
-    {
-      banknote:=2;
-    }
-     else if(sum < 2) 
-    {  
-      banknote:=1; 
-    }
+  }
+  else{
+    //we know the index is 5
+    assert index==5;
+  }
+  
 }
 
 
@@ -265,7 +252,7 @@ lemma exchangeArgument(rest: int, currentSolution: seq<int>, banknote: int)
 
         assert solutionElementsSum(optimalSolution) <= banknote - 1;
         assert rest >= banknote;
-        assert solutionElementsSum(optimalSolution) < rest;
+        assert solutionElementsSum(optimalSolution) <= rest-1;
         assert isOptimalSolution(optimalSolution, rest);
         assert false; 
       }
@@ -278,60 +265,53 @@ lemma exchangeArgument32(rest: int, sum: int, currentSolution: seq<int>, optimal
     requires isOptimalSolution(optimalSolution, rest - 32)
     ensures isOptimalSolution(addValueToIndex(optimalSolution, 1, 32), rest)
 {
-  var solution := solutionsSum(optimalSolution, [0,0,0,0,0,1]); 
+  var solution := optimalSolution[5:=optimalSolution[5]+1]; 
   var i := 4;
   if(!isOptimalSolution(solution, rest))
-  {
+  { 
+    //if we have 2 of i is optimal to have an 32 so we don't have 2 of 16
     if(optimalSolution[i] > 1)
-    { //daca avem 2 de 16 e mai optim un 32 deci nu avem 2 de 16
-      var solution := addValueToIndex(optimalSolution, -2, power(2,i));
-      RightIndexAdded(solution, -2, power(2,i));
-      var solution2 := addValueToIndex(solution, 1, power(2,i+1));
-      RightIndexAdded(solution2, 1, power(2,i+1));
-      assert isSolution(solution2, rest - 32);
-      assert cost(solution2) == cost(optimalSolution) - 1;
-      assert cost(optimalSolution) - 1 < cost(solution2);
-      assert false;
+    { 
+      var solution := optimalSolution[i:=optimalSolution[i]-2];
+          solution :=solution[i+1:=solution[i+1]+1];
+          assert isSolution(solution, rest - 32);
+          assert cost(solution) == cost(optimalSolution) - 1;
+          assert cost(optimalSolution) - 1 < cost(solution);
+          assert false;
     }
     else
     { 
-      assert optimalSolution[i] <= 1;
       while ( 0 < i )
         invariant  0 <= i <= 4
         invariant forall index :: 4 >= index >= i ==> optimalSolution[index] <= 1
       {
-        assert i - 1 >= 0;
         i:= i - 1;
-        assert isOptimalSolution(optimalSolution, rest - 32);
-
         if(optimalSolution[i] > 1)
         {
-          var solution := addValueToIndex(optimalSolution, -2, power(2, i));
-          RightIndexAdded(solution, -2, power(2, i));
-          var solution2 := addValueToIndex(solution, 1, power(2, i+1));
-          RightIndexAdded(solution2, 1, power(2, i+1));
-          assert isSolution(solution2, rest - 32);
-          assert cost(solution2) == cost(optimalSolution) - 1;
-          assert cost(optimalSolution) - 1 < cost(solution2);
+          var solution := optimalSolution[i:=optimalSolution[i]-2];
+          solution :=solution[i+1:=solution[i+1]+1];
+          assert isSolution(solution, rest - 32);
+          assert cost(solution) == cost(optimalSolution) - 1;
+          assert cost(optimalSolution) - 1 < cost(solution);
           assert false;
         }
           assert optimalSolution[i] <= 1;     
       }
-        assert rest >= 32;
-        assert solutionElementsSum(optimalSolution) < rest;
+        assert solutionElementsSum(optimalSolution) <= rest-1;
         assert isOptimalSolution(solution, rest);
         assert false; 
     }
   }
 }
 
-lemma banknoteMaxim(rest: int, sum: int, finalSolution: seq<int>, banknote: int)
-  requires banknote <= rest < banknote*2
-  requires banknote == 1 || banknote == 2 || banknote == 4|| banknote == 8 || banknote == 16
+lemma banknoteMaxim(rest: int, sum: int, finalSolution: seq<int>, index: int)
+  requires 0<=index<=4
+  requires power(2,index) <= rest < power(2,index+1)
   requires isValidSolution(finalSolution)
   requires addOptimRestEqualsOptimSum(rest, sum, finalSolution)
-  ensures addOptimRestEqualsOptimSum(rest - banknote, sum, addValueToIndex(finalSolution, 1, banknote))
+  ensures addOptimRestEqualsOptimSum(rest - power(2,index), sum,finalSolution[index:=finalSolution[index]+1])
 {
+    var banknote:=power(2,index);
     forall currentSolution | isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - banknote)
         ensures isOptimalSolution(addValueToIndex(solutionsSum(currentSolution, finalSolution), 1, banknote), sum)
     {
@@ -358,34 +338,15 @@ lemma currentSolutionAreCostMin(rest: int, sum: int, solution: seq<int>)
     ensures cost(someSolution) >= cost(solutionsSum(solution, [0,0,0,0,0,1]))
   {
     exchangeArgument32(rest, sum, someSolution, solution);
-  }
-  
+  } 
 }
 
-lemma finalSolutionHasMinCost(rest: int, sum: int, someSolution: seq<int>, finalSolution: seq<int>, currentSolution: seq<int>)
-  requires isValidSolution(someSolution)
-  requires isValidSolution(finalSolution)
-  requires isValidSolution(currentSolution)
-  requires rest >= 32
-  requires isOptimalSolution(currentSolution, rest - 32)
-  requires isSolution(solutionsSum(solutionsSum(finalSolution, currentSolution), [0,0,0,0,0,1]), sum)
-  requires isSolution(someSolution, sum)
-  requires addOptimRestEqualsOptimSum(rest, sum, finalSolution)
-  ensures cost(someSolution) >= cost(solutionsSum(solutionsSum(finalSolution, currentSolution), [0,0,0,0,0,1]))
-{
-  currentSolutionAreCostMin(rest, sum, currentSolution);
-}
-    
 lemma banknoteMaxim32(rest: int, sum: int, finalSolution: seq<int>)
   requires rest >= 32
   requires isValidSolution(finalSolution)
   requires addOptimRestEqualsOptimSum(rest, sum, finalSolution)
   ensures addOptimRestEqualsOptimSum(rest - 32, sum, solutionsSum(finalSolution, [0,0,0,0,0,1]))
 {
-  assert forall currentSolution :: isValidSolution(currentSolution) ==>
-      (isSolution(currentSolution, rest) ==> 
-       isSolution(solutionsSum(finalSolution, currentSolution), sum));
-
    forall currentSolution | isValidSolution(currentSolution) && isSolution(currentSolution, rest - 32) 
       ensures isSolution(solutionsSum(solutionsSum(finalSolution, currentSolution), [0,0,0,0,0,1]), sum)
    {
@@ -404,12 +365,11 @@ lemma banknoteMaxim32(rest: int, sum: int, finalSolution: seq<int>)
     forall someSolution | isValidSolution(someSolution) && isSolution(someSolution, sum)
       ensures cost(someSolution) >= cost(solutionsSum(solutionsSum(finalSolution, currentSolution), [0,0,0,0,0,1]))
     {
-        finalSolutionHasMinCost(rest, sum, someSolution, finalSolution, currentSolution);
+        currentSolutionAreCostMin(rest, sum, currentSolution);
     }
   }
 }
 
-//vrem o solutionvalida(are formatul specificat) , corecta(creeaza sum data) si optima(creeaza in cel mai eficient mod)
 method banknoteMinimum(sum: int) returns (solution: seq<int>)
   requires sum >= 0 
   ensures isValidSolution(solution)
@@ -417,56 +377,33 @@ method banknoteMinimum(sum: int) returns (solution: seq<int>)
   ensures isOptimalSolution(solution, sum)
 {
    var rest := sum;
-   var banknote1, banknote2, banknote4, banknote8, banknote16, banknote32, banknote := 0, 0, 0, 0, 0, 0, 0;
-
-   assert isOptimalSolution([banknote1, banknote2, banknote4, banknote8, banknote16, banknote32], sum - rest);
+   solution:=[0, 0, 0, 0, 0, 0];
+   var index:=0;
+   assert isOptimalSolution(solution, sum - rest) ;
    while (0 < rest )
     invariant 0 <= rest <= sum
-    invariant isSolution([banknote1, banknote2, banknote4, banknote8, banknote16, banknote32], sum - rest)
-    invariant addOptimRestEqualsOptimSum(rest, sum, [banknote1, banknote2, banknote4, banknote8, banknote16, banknote32])
+    invariant |solution|==6
+    invariant forall i :: 0<=i<=5 ==> solution[i]>=0
+    invariant isSolution(solution, sum - rest)
+    invariant addOptimRestEqualsOptimSum(rest, sum, solution)
     decreases rest
   {
-    //la fiecare iteratie se alege bancnota optima pentru a da rest, apoi se modifica solutia
-    banknote:=maxRest(rest);
-    if(banknote==1 || banknote==2 ||banknote==4 ||banknote ==8 ||banknote==16)
+    //at every iteration it chooses the banknote optimal for rest, then modifies solution
+    index:=maxBanknote(rest);
+    var banknote:=power(2,index);
+    if(index!=5)
     {
-      var solution := [banknote1, banknote2, banknote4, banknote8, banknote16, banknote32];
-      banknoteMaxim(rest, sum, solution, banknote);
-      assert isSolution(addValueToIndex(solution, 1, banknote), sum - rest + banknote); 
-      assert addOptimRestEqualsOptimSum(rest - banknote, sum, addValueToIndex(solution, 1, banknote));
-    }
-
-    if( banknote == 1)
-    { 
-      banknote1 := banknote1 + 1;
-    } 
-    else if( banknote == 2)
-    { 
-      banknote2 := banknote2 + 1;
-    } 
-    else  if( banknote == 4)
-    { 
-      banknote4 := banknote4 + 1;
-    }
-    else if( banknote == 8)
-    { 
-      banknote8 := banknote8 + 1;
-    }
-    else if( banknote == 16)
-    { 
-      banknote16 := banknote16 + 1;
-    }
+      banknoteMaxim(rest, sum, solution,index);
+     }
     else 
     {
-      var solution := [banknote1, banknote2, banknote4, banknote8, banknote16, banknote32];
       banknoteMaxim32(rest, sum, solution);
-      assert isSolution(addValueToIndex(solution, 1, banknote), sum - rest + banknote); 
-      assert addOptimRestEqualsOptimSum(rest-banknote,sum,addValueToIndex(solution, 1, banknote));
-      banknote32 := banknote32 + 1;
     }
-    rest := rest - banknote;//restul de dat  
+    assert isSolution(solution[index:=solution[index]+1], sum - rest + banknote); 
+    assert addOptimRestEqualsOptimSum(rest - banknote, sum, solution[index:=solution[index]+1]);
+    solution := solution[index:=solution[index]+1];
+    rest := rest - banknote; 
   }
-  solution := [banknote1, banknote2, banknote4, banknote8, banknote16, banknote32];
 }
 
 method Main () 
@@ -487,5 +424,5 @@ method Main ()
   print " \n Banknotes of 16: ";
   print solution[4];
   print "\n Banknotes of 32: ";
-  print solution[5];
+  print solution[5]; 
 }
