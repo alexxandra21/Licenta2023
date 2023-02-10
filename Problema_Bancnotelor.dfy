@@ -306,7 +306,7 @@ method banknoteMinimum(sum: int) returns(solution: seq < int > )
       assert addOptimRestEqualsOptimSum(rest - banknote, sum, addValueToIndex(solution,1,index));
       solution:= addValueToIndex(solution,1,index);
       rest:= rest - banknote;
-  }
+    }
 }
 
 method Main() {
