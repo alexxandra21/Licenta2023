@@ -657,11 +657,6 @@ INPUT chapters\chapter0.tex
 INPUT .\chapters\chapter0.tex
 INPUT .\chapters\chapter0.tex
 INPUT chapters\chapter0.tex
-INPUT C:\Miktex\tex\latex\psnfss\ts1ppl.fd
-INPUT C:\Miktex\tex\latex\psnfss\ts1ppl.fd
-INPUT C:\Miktex\tex\latex\psnfss\ts1ppl.fd
-INPUT C:\Miktex\tex\latex\psnfss\ts1ppl.fd
-INPUT C:\Miktex\fonts\tfm\adobe\palatino\pplr8c.tfm
 INPUT .\chapters\chapter1.tex
 INPUT .\chapters\chapter1.tex
 INPUT .\chapters\chapter1.tex
