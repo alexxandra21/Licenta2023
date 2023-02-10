@@ -31,14 +31,14 @@
         rest:= rest - banknote;
     }
     \end{lstlisting}
-    Acest algoritm era suficient pentru a rezolva problema, dar nu era suficient pentru a demonstra că soluția produsă este optimă.
+    
+    Acest algoritm era suficient pentru a rezolva problema, dar nu era suficient pentru a demonstra că soluția produsă este optimă.\par
     Considerăm o soluție optimă soluția de cost minim, costul fiind numărul de bancnote.
     \subsection{Observații}
     Datorită bancnotelor care sunt puteri ale lui 2, dacă avem mai mult de o bancnotă de valoare mai mică decât 32,
-    putem înlocui 2 bancnote de acea valoare cu o bancnotă de valoarea următoare și am obține o soluție cu cost mai mic.
-    o soluție care conține oricare 2 bancnote x cu valoare mai mică 
-    decât 32 poate fi înlocuită cu o soluție care conține o următoare bancnotă y   și 
-    //Orice soluție are s[i] <= 1, 0 <= i <= 4
+    putem înlocui 2 bancnote de acea valoare cu o bancnotă de valoarea următoare și am obține o soluție cu cost mai mic.\par
+    Astfel, am descoperit proprietatea: 
+    $  forall$ $i :: 0 <= i <= 4 ==> s[i] <= 1 $
 
 
 
