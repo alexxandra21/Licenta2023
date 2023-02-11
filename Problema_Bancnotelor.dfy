@@ -173,7 +173,6 @@ lemma exchangeArgument32(rest: int, sum: int, currentSolution: seq < int > , opt
   var i:= 4;
   if (!isOptimalSolution(solution, rest)) 
   {
-    //if we have 2 of i is optimal to have an 32 so we don't have 2 of 16
     if (optimalSolution[i] > 1) 
     {
       var solution:= optimalSolution[i:= optimalSolution[i] - 2];
@@ -219,14 +218,8 @@ lemma banknoteMaxim(rest: int, sum: int, finalSolution: seq < int > , index: int
   forall currentSolution | isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - banknote)
     ensures isOptimalSolution(solutionsSum(solutionsSum(currentSolution, finalSolution), [0, 0, 0, 0, 0, 0][index:= 1]), sum) 
   {
-    assert isSolution(currentSolution, rest - banknote);
     assert isSolution(currentSolution[index:= currentSolution[index] + 1], rest);
-
     exchangeArgument(rest, currentSolution, index);
-
-    assert forall solution::isValidSolution(solution) && isSolution(solution, rest - banknote) ==> cost(solution) >= cost(currentSolution);
-    assert isSolution(solutionsSum(solutionsSum(currentSolution, finalSolution), [0, 0, 0, 0, 0, 0][index:= 1]), sum);
-    assert forall solution::isValidSolution(solution) && isSolution(solution, sum) ==> cost(solution) >= cost(solutionsSum(solutionsSum(currentSolution, finalSolution), [0, 0, 0, 0, 0, 0][index:= 1]));
   }
   assert forall currentSolution::isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - banknote) ==> isOptimalSolution(solutionsSum(solutionsSum(currentSolution, finalSolution), [0, 0, 0, 0, 0, 0][index:= 1]), sum);
 }
@@ -260,12 +253,6 @@ lemma banknoteMaxim32(rest: int, sum: int, finalSolution: seq < int > )
   forall currentSolution | isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - 32)
     ensures isOptimalSolution(solutionsSum(solutionsSum(finalSolution, currentSolution), [0, 0, 0, 0, 0, 1]), sum)
   {
-    assert isSolution(currentSolution, rest - 32);
-    assert isSolution(solutionsSum(currentSolution, [0, 0, 0, 0, 0, 1]), rest);
-    assert isSolution(solutionsSum(solutionsSum(currentSolution, finalSolution), [0, 0, 0, 0, 0, 1]), sum);
-
-    assert forall someSolution::isValidSolution(someSolution) && isSolution(someSolution, rest - 32) ==> cost(someSolution) >= cost(currentSolution);
-
     forall someSolution | isValidSolution(someSolution) && isSolution(someSolution, sum)
       ensures cost(someSolution) >= cost(solutionsSum(solutionsSum(finalSolution, currentSolution), [0, 0, 0, 0, 0, 1])) 
     {
@@ -287,11 +274,9 @@ method banknoteMinimum(sum: int) returns(solution: seq < int > )
   while (0 < rest)
     invariant 0 <= rest <= sum
     invariant isValidSolution(solution)
-    invariant isSolution(solution, sum - rest)
     invariant addOptimRestEqualsOptimSum(rest, sum, solution)
     decreases rest 
     {
-      //at every iteration it chooses the banknote optimal for rest, then modifies solution
       index:= maxBanknote(rest);
       var banknote:= power(2, index);
       if (index != 5) 
@@ -302,8 +287,6 @@ method banknoteMinimum(sum: int) returns(solution: seq < int > )
       {
         banknoteMaxim32(rest, sum, solution);
       }
-      assert isSolution(addValueToIndex(solution,1,index), sum - rest + banknote);
-      assert addOptimRestEqualsOptimSum(rest - banknote, sum, addValueToIndex(solution,1,index));
       solution:= addValueToIndex(solution,1,index);
       rest:= rest - banknote;
     }
