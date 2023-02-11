@@ -11,7 +11,8 @@
 \contentsline {subsection}{\numberline {3.2.1}Schema verificării}{5}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Condiții ca o soluția finală să fie optimă}{5}{subsection.3.2.2}%
 \contentsline {section}{\numberline {3.3}Pașii verificării}{6}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}}{6}{subsection.3.3.1}%
-\contentsline {section}{\numberline {3.4}Posibile îmbunătățiri ???}{6}{section.3.4}%
-\contentsline {chapter}{Concluzii}{7}{chapter*.2}%
-\contentsline {chapter}{Bibliografie}{8}{chapter*.3}%
+\contentsline {subsection}{\numberline {3.3.1}banknoteMinimum}{6}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}maxBanknote}{7}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Posibile îmbunătățiri ???}{7}{section.3.4}%
+\contentsline {chapter}{Concluzii}{8}{chapter*.2}%
+\contentsline {chapter}{Bibliografie}{9}{chapter*.3}%

@@ -52,8 +52,68 @@
     asigurând faptul că suma soluțiilor locale creează soluția finală optimă.\par
     
 \section{Pașii verificării}
-    \subsection{}
-    //pas cu pas exemple de cod
+    \subsection{banknoteMinimum}
+    Am implementat algoritmul Greedy care rezolva Problema Bancnotelor cu bancnote puteri ale lui 2, 
+    apoi am adăugat treptat condițiile care garantează că soluția găsită este soluție optimă.\par
+    \begin{lstlisting}
+    method banknoteMinimum(sum: int) returns(solution: seq < int > )
+        requires sum >= 0
+        ensures isValidSolution(solution)
+        ensures isSolution(solution, sum)
+        ensures isOptimalSolution(solution, sum) 
+    {
+        var rest:= sum;
+        solution:= [0, 0, 0, 0, 0, 0];
+        var index:= 0;
+        assert isOptimalSolution(solution, sum - rest);
+        while (0 < rest)
+            invariant 0 <= rest <= sum
+            invariant isValidSolution(solution)
+            invariant addOptimRestEqualsOptimSum(rest, sum, solution)
+            decreases rest 
+        {
+            index:= maxBanknote(rest);
+            var banknote:= power(2, index);
+            if (index != 5) 
+            {
+                banknoteMaxim(rest, sum, solution, index);
+            } 
+            else 
+            {
+                banknoteMaxim32(rest, sum, solution);
+            }
+            solution:= addValueToIndex(solution,1,index);
+            rest:= rest - banknote;
+        }
+    }
+    \end{lstlisting}
+    \subsection{maxBanknote}
+    Pentru a alege bancnota cea mai mare am creat funcția maxBanknote.\par
+    \begin{lstlisting}
+      method maxBanknote(sum: int) returns(index: int)
+        requires sum > 0
+        ensures 0 <= index <= 5
+        ensures 0 <= power(2, index) <= sum
+        ensures(index != 5 && power(2, index + 1) > sum) || index == 5 
+      {
+        index:= 5;
+        if (power(2, index) > sum) 
+        {
+          assert power(2, index + 1) > sum;
+          while (power(2, index) > sum && index > 0)
+            invariant power(2, index + 1) > sum 
+            {
+              index:= index - 1;
+              assert power(2, index + 1) > sum;
+            }
+        } 
+          else 
+        {
+          //we know the index is 5
+          assert index == 5;
+        }
+      }
+    \end{lstlisting}
     
 \section{Posibile îmbunătățiri ???}
 
