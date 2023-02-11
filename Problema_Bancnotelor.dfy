@@ -224,7 +224,7 @@ lemma banknoteMaxim(rest: int, sum: int, finalSolution: seq < int > , index: int
   assert forall currentSolution::isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - banknote) ==> isOptimalSolution(solutionsSum(solutionsSum(currentSolution, finalSolution), [0, 0, 0, 0, 0, 0][index:= 1]), sum);
 }
 
-lemma currentSolutionAreCostMin(rest: int, sum: int, solution: seq < int > )
+lemma currentSolutionHasCostMin(rest: int, sum: int, solution: seq < int > )
   requires isValidSolution(solution)
   requires rest >= 32
   requires isSolution(solution, rest - 32)
@@ -256,7 +256,7 @@ lemma banknoteMaxim32(rest: int, sum: int, finalSolution: seq < int > )
     forall someSolution | isValidSolution(someSolution) && isSolution(someSolution, sum)
       ensures cost(someSolution) >= cost(solutionsSum(solutionsSum(finalSolution, currentSolution), [0, 0, 0, 0, 0, 1])) 
     {
-      currentSolutionAreCostMin(rest, sum, currentSolution);
+      currentSolutionHasCostMin(rest, sum, currentSolution);
     }
   }
 }

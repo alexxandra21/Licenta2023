@@ -114,7 +114,115 @@
         }
       }
     \end{lstlisting}
-    
-\section{Posibile îmbunătățiri ???}
 
+
+    \subsection{banknoteMaxim}
+    \begin{lstlisting}
+    lemma banknoteMaxim(rest: int, sum: int, finalSolution: seq < int > , index: int)
+        requires 0 <= index <= 4
+        requires power(2, index) <= rest < power(2, index + 1)
+        requires isValidSolution(finalSolution)
+        requires addOptimRestEqualsOptimSum(rest, sum, finalSolution)
+        ensures addOptimRestEqualsOptimSum(rest - power(2, index), sum, finalSolution[index:= finalSolution[index] + 1]) 
+    {
+    var banknote:= power(2, index);
+    forall currentSolution | isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - banknote)
+        ensures isOptimalSolution(solutionsSum(solutionsSum(currentSolution, finalSolution), [0, 0, 0, 0, 0, 0][index:= 1]), sum) 
+    {
+        assert isSolution(currentSolution[index:= currentSolution[index] + 1], rest);
+        exchangeArgument(rest, currentSolution, index);
+    }
+    assert forall currentSolution::isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - banknote) ==> isOptimalSolution(solutionsSum(solutionsSum(currentSolution, finalSolution), [0, 0, 0, 0, 0, 0][index:= 1]), sum);
+    }
+    \end{lstlisting}
+
+    \subsection{exchangeArgument}
+    \begin{lstlisting}
+        lemma exchangeArgument(rest: int, currentSolution: seq < int > , index: int)
+            requires 0 <= index <= 4
+            requires power(2, index) <= rest < power(2, index + 1)
+            requires isValidSolution(currentSolution)
+            requires isOptimalSolution(currentSolution, rest - power(2, index))
+            ensures isOptimalSolution(currentSolution[index:= currentSolution[index] + 1], rest) 
+        {
+            var banknote:= power(2, index);
+            var solution:= currentSolution[index:= currentSolution[index] + 1];
+            assert isValidSolution(solution);
+            assert isSolution(solution, rest);
+            var i:= index;
+            if (!isOptimalSolution(solution, rest)) 
+            {
+            var optimalSolution:| isValidSolution(optimalSolution) && isSolution(optimalSolution, rest) &&
+                isOptimalSolution(optimalSolution, rest) && cost(optimalSolution) < cost(solution);
+
+            assert cost(solution) == cost(currentSolution) + 1;
+            assert isOptimalSolution(optimalSolution, rest);
+
+            if (optimalSolution[index] -1 >= 0) 
+            {
+                assert optimalSolution[index]-1 >= 0;
+                var betterSolution:= addValueToIndex(optimalSolution,-1,index);
+                assert isSolution(betterSolution, rest - banknote);
+                assert cost(betterSolution) == cost(optimalSolution) - 1;
+                assert cost(optimalSolution) - 1 < cost(currentSolution);
+                assert false;
+            } 
+            else 
+            {
+                while (0 < i)
+                invariant 0 <= i <= index
+                invariant forall x::index >= x >= i ==> optimalSolution[x] <= 1 
+                {
+                i:= i - 1;
+                assert isOptimalSolution(optimalSolution, rest);
+                if (optimalSolution[i] > 1) 
+                {
+                    var optimalSolution' := optimalSolution[i:=optimalSolution[i]-2];
+                    optimalSolution' := optimalSolution' [i + 1:= optimalSolution'[i+1]+1];
+                    assert isSolution(optimalSolution', rest);
+                    assert cost(optimalSolution') == cost(optimalSolution) - 1;
+                    assert cost(optimalSolution') < cost(optimalSolution);
+                    assert false;
+                }
+                }
+                assert solutionElementsSum(optimalSolution) <= banknote - 1; assert rest >= banknote; assert solutionElementsSum(optimalSolution) <= rest - 1; assert isOptimalSolution(optimalSolution, rest); assert false;
+            }
+            }
+        }
+    \end{lstlisting}
+
+    \subsection{addValueToIndex}
+    \begin{lstlisting}
+        function method addValueToIndex(solution: seq<int>, value: int, index: int): seq<int>
+            requires 0 <= index <= 5
+            requires isValidSolution(solution)
+            requires solution[index] + value >= 0
+            ensures isValidSolution(solution)
+            ensures solutionElementsSum(solution) + value*power(2, index) == solutionElementsSum(solution[index:=solution[index]+value])
+        {
+        solution[index:= solution[index] + value]
+        }
+    \end{lstlisting}
+
+    
+    \subsection{Ultimul pas}
+    În final, am descoperit că pentru bancnota 32 am nevoie de o verificare diferită.\par
+    Voi descrie ulterior cum am tratat acest caz.\par
+    -de ce trebuie abordata diferit- 
+    
+    
+    
+\section{Problema bancnotei nemărginite superior, 32}
+\subsection{banknoteMaxim32}
+\begin{lstlisting}
+\end{lstlisting}
+
+\subsection{currentSolutionHasCostMin}
+\begin{lstlisting}
+\end{lstlisting}
+
+
+\subsection{exchangeArgument32}
+\begin{lstlisting}
+\end{lstlisting}
 
