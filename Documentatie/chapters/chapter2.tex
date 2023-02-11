@@ -41,9 +41,16 @@
     \end{center}
     În schema de mai sus am exemplificat modul în care funcțiile, lemele și metodele se apelează una pe cealaltă pentru a demonstra faptul că soluția găsită este soluție optimă.\par
 
-    \subsection{Condiții ca o soluție să fie optimă}
-    Pentru a avea o soluție optimă trebuie să avem o soluție validă (cu 6 elemente), care produce suma corectă și care are costul cel mai mic.
-   
+    \subsection{Condiții ca o soluția finală să fie optimă}
+    $\bullet$ Pentru a avea o soluție optimă trebuie să avem o soluție validă (cu 6 elemente), care produce suma corectă
+     și care are costul cel mai mic.\par
+    $\bullet$ Pentru a avea o soluție optimă finală, pe parcursul construirii soluției, în buclă, trebuie menținută proprietatea
+     de a alege soluția optimă locală pentru rest, iar suma soluțiilor optime locale să fie soluție optimă pentru sumă.\par
+    $\bullet$ Soluția formată dintr-o bancnotă, cea aleasă în iterația curentă, produce o soluție optimă pentru suma 
+    de valoare bancnotă, asigurând faptul că avem o soluție optimă locală.\par
+    $\bullet$ O soluție optimă pentru suma $x$, adunată cu o soluție optimă pentru suma $y$ creează o soluție optimă pentru suma $x+y$, 
+    asigurând faptul că suma soluțiilor locale creează soluția finală optimă.\par
+    
 \section{Pașii verificării}
     \subsection{}
     //pas cu pas exemple de cod
