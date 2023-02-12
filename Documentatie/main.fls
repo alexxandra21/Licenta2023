@@ -709,6 +709,13 @@ INPUT .\chapters\chapter2.tex
 INPUT chapters\chapter2.tex
 INPUT C:\Miktex\fonts\vf\adobe\palatino\pplb7t.vf
 INPUT C:\Miktex\fonts\tfm\adobe\palatino\pplb8r.tfm
+INPUT .\chapters\chapter3.tex
+INPUT .\chapters\chapter3.tex
+INPUT .\chapters\chapter3.tex
+INPUT chapters\chapter3.tex
+INPUT .\chapters\chapter3.tex
+INPUT .\chapters\chapter3.tex
+INPUT chapters\chapter3.tex
 INPUT C:\Miktex\tex\latex\psnfss\ot1pcr.fd
 INPUT C:\Miktex\tex\latex\psnfss\ot1pcr.fd
 INPUT C:\Miktex\tex\latex\psnfss\ot1pcr.fd
