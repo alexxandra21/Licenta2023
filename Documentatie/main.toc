@@ -19,7 +19,6 @@
 \contentsline {section}{\numberline {3.4}Problema bancnotei nemărginite superior, 32}{11}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}Cum se tratează separat cazul 32}{11}{subsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.4.2}banknoteMaxim32}{11}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}currentSolutionHasCostMin}{12}{subsection.3.4.3}%
-\contentsline {subsection}{\numberline {3.4.4}exchangeArgument32}{13}{subsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.4.3}exchangeArgument32}{12}{subsection.3.4.3}%
 \contentsline {chapter}{Concluzii}{15}{chapter*.2}%
 \contentsline {chapter}{Bibliografie}{16}{chapter*.3}%

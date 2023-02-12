@@ -74,7 +74,7 @@ apoi am adăugat treptat condițiile care garantează că soluția găsită este
     Voi detalia metodele și lemele mai complexe.
      
     \begin{lstlisting}
-    method banknoteMinimum(sum: int) returns(solution: seq < int > )
+    method banknoteMinimum(sum: int) returns(solution: seq <int> )
         requires sum >= 0
         ensures isValidSolution(solution)
         ensures isSolution(solution, sum)
@@ -143,7 +143,7 @@ apoi am adăugat treptat condițiile care garantează că soluția găsită este
     adaugăm bancnota aceasta devine optimă pentru $rest$.\par
     Acest lucru este demonstrat cu ajutorul lemei exchangeArgument.
     \begin{lstlisting}
-    lemma banknoteMaxim(rest: int, sum: int, finalSolution: seq < int > , index: int)
+    lemma banknoteMaxim(rest: int, sum: int, finalSolution: seq <int> , index: int)
         requires 0 <= index <= 4
         requires power(2, index) <= rest < power(2, index + 1)
         requires isValidSolution(finalSolution)
@@ -171,72 +171,72 @@ apoi am adăugat treptat condițiile care garantează că soluția găsită este
     Nu există două bancnote de aceeași valoare în soluție, mai mici de 32.\par
     În acest mod știm că soluția presupusă nu poate fi optimă, deoarece, dacă respectă proprietatea
     suma produsă de aceasta nu poate fi egală cu rest. \par
-    Deoarece :
-    $\bullet \sum_{k=0}^{index-1} 2^{k} = 2^{index}-1 $
-    $\bullet rest > = 2^{index} $
-    Deci presupusa soluție pentru rest nu poate fi egală decât cu cel mult rest-1, astfel nu poate fi soluție optimă și se ajunge la o contradicție. 
+    Deoarece :\par
+    $\bullet \sum_{k=0}^{index-1} 2^{k} = 2^{index}-1 $\par
+    $\bullet rest > = 2^{index} $ \par
+    Deci presupusa soluție pentru rest nu poate fi egală decât cu cel mult $rest-1$, astfel nu poate fi soluție optimă și se ajunge la o contradicție. 
 
     
     \begin{lstlisting}
-        lemma exchangeArgument(rest: int, currentSolution: seq < int > , index: int)
-            requires 0 <= index <= 4
-            requires power(2, index) <= rest < power(2, index + 1)
-            requires isValidSolution(currentSolution)
-            requires isOptimalSolution(currentSolution, rest - power(2, index))
-            ensures isOptimalSolution(currentSolution[index:= currentSolution[index] + 1], rest) 
+lemma exchangeArgument(rest: int, currentSolution: seq <int> , index: int)
+    requires 0 <= index <= 4
+    requires power(2, index) <= rest < power(2, index + 1)
+    requires isValidSolution(currentSolution)
+    requires isOptimalSolution(currentSolution, rest - power(2, index))
+    ensures isOptimalSolution(currentSolution[index:= currentSolution[index] + 1], rest) 
+{
+    var banknote:= power(2, index);
+    var solution:= currentSolution[index:= currentSolution[index] + 1];
+    assert isValidSolution(solution);
+    assert isSolution(solution, rest);
+    var i:= index;
+    if (!isOptimalSolution(solution, rest)) 
+    {
+    var optimalSolution:| isValidSolution(optimalSolution) && isSolution(optimalSolution, rest) &&
+        isOptimalSolution(optimalSolution, rest) && cost(optimalSolution) < cost(solution);
+    if (optimalSolution[index] -1 >= 0) 
+    {
+        var betterSolution:= addValueToIndex(optimalSolution,-1,index);
+        assert isSolution(betterSolution, rest - banknote);
+        assert cost(betterSolution) == cost(optimalSolution) - 1;
+        assert cost(optimalSolution) - 1 < cost(currentSolution);
+        assert false;
+    } 
+    else 
+    {
+        while (0 < i)
+        invariant 0 <= i <= index
+        invariant forall x::index >= x >= i ==> optimalSolution[x] <= 1 
         {
-            var banknote:= power(2, index);
-            var solution:= currentSolution[index:= currentSolution[index] + 1];
-            assert isValidSolution(solution);
-            assert isSolution(solution, rest);
-            var i:= index;
-            if (!isOptimalSolution(solution, rest)) 
-            {
-            var optimalSolution:| isValidSolution(optimalSolution) && isSolution(optimalSolution, rest) &&
-                isOptimalSolution(optimalSolution, rest) && cost(optimalSolution) < cost(solution);
-            if (optimalSolution[index] -1 >= 0) 
-            {
-                var betterSolution:= addValueToIndex(optimalSolution,-1,index);
-                assert isSolution(betterSolution, rest - banknote);
-                assert cost(betterSolution) == cost(optimalSolution) - 1;
-                assert cost(optimalSolution) - 1 < cost(currentSolution);
-                assert false;
-            } 
-            else 
-            {
-                while (0 < i)
-                invariant 0 <= i <= index
-                invariant forall x::index >= x >= i ==> optimalSolution[x] <= 1 
-                {
-                i:= i - 1;
-                assert isOptimalSolution(optimalSolution, rest);
-                if (optimalSolution[i] > 1) 
-                {
-                    var optimalSolution' := optimalSolution[i:=optimalSolution[i]-2];
-                    optimalSolution' := optimalSolution' [i + 1:= optimalSolution'[i+1]+1];
-                    assert isSolution(optimalSolution', rest);
-                    assert cost(optimalSolution') == cost(optimalSolution) - 1;
-                    assert cost(optimalSolution') < cost(optimalSolution);
-                    assert false;
-                }
-                }
-                assert solutionElementsSum(optimalSolution) <= banknote - 1;
-                assert rest >= banknote; 
-                assert solutionElementsSum(optimalSolution) <= rest - 1; 
-                assert isOptimalSolution(optimalSolution, rest); 
-                assert false;
-                }
-            }
+        i:= i - 1;
+        assert isOptimalSolution(optimalSolution, rest);
+        if (optimalSolution[i] > 1) 
+        {
+            var optimalSolution' := optimalSolution[i:=optimalSolution[i]-2];
+            optimalSolution' := optimalSolution' [i + 1:= optimalSolution'[i+1]+1];
+            assert isSolution(optimalSolution', rest);
+            assert cost(optimalSolution') == cost(optimalSolution) - 1;
+            assert cost(optimalSolution') < cost(optimalSolution);
+            assert false;
         }
+        }
+        assert solutionElementsSum(optimalSolution) <= banknote - 1;
+        assert rest >= banknote; 
+        assert solutionElementsSum(optimalSolution) <= rest - 1; 
+        assert isOptimalSolution(optimalSolution, rest); 
+        assert false;
+        }
+    }
+}
     \end{lstlisting}
     
     \subsection{Ultimul pas}
     În final, am descoperit că pentru bancnota 32 am nevoie de o verificare diferită. Voi descrie ulterior cum am tratat acest caz.\par
     $\bullet$ De ce trebuie abordat diferit cazul când bancnota optimă de adăugat este 32?\par
-    Fiecare bancnotă 1,2,4,8 și 16 este mărginită superior de bancnota imediat următoare.\par
-    Felul în care abordez cazurile 1,2,4,8 și 16 constă în verificarea faptului că 
-    nu avem încă o bancnotă de aceeași valoare în soluție deja, altfel ar fi mai eficient să avem  
-    o bancnotă de valoarea imediat următoare și să scăpăm de bancnota deja existentă din soluție.\par
+    Bancnotele 1,2,4,8 și 16 sunt mărginite superior de bancnota imediat următoare.\par
+    La cazurile 1,2,4,8 și 16 verific  faptul că nu avem încă o bancnotă de aceeași valoare în soluție deja, 
+    altfel ar fi mai eficient să avem o bancnotă de valoarea imediat următoare și să scăpăm de bancnota deja 
+    existentă din soluție.\par
     În cazul bancnotei 32 nu există o altă bancnotă de valoare mai mare cu care putem să înlocuim apariția bancnotei 32,
     așadar a trebuit să demonstrez în alt mod că adăugând bancnota 32 la soluția găsită până în prezent genereaz o soluție optimă pentru 
     pentru rest.   
@@ -247,56 +247,55 @@ apoi am adăugat treptat condițiile care garantează că soluția găsită este
 \section{Problema bancnotei nemărginite superior, 32}
 
 \subsection{Cum se tratează separat cazul 32}
+Demonstrăm că soluția plus bancnota 32 generează o soluție optimă pentru restul dat până în prezent 
+constă în lema banknoteMaxim32 care asigură proprietatea că orice soluție pentru rest-32 adunată cu soluția optimă 
+gasită până în prezent pentru restul deja dat la care adaug bancnota 32 este soluție optimă pentru sumă.
 
 \subsection{banknoteMaxim32}
-\begin{lstlisting}
-lemma banknoteMaxim32(rest: int, sum: int, finalSolution: seq < int > )
-  requires rest >= 32
-  requires isValidSolution(finalSolution)
-  requires addOptimRestEqualsOptimSum(rest, sum, finalSolution)
-  ensures addOptimRestEqualsOptimSum(rest - 32, sum, solutionsSum(finalSolution, [0, 0, 0, 0, 0, 1])) 
-{
-  forall currentSolution | isValidSolution(currentSolution) && isSolution(currentSolution, rest - 32)
-    ensures isSolution(solutionsSum(solutionsSum(finalSolution, currentSolution), [0, 0, 0, 0, 0, 1]), sum) 
-  {
-    assert isSolution(solutionsSum(currentSolution, [0, 0, 0, 0, 0, 1]), rest);
-  }
+BanknoteMaxim32 demonstrează proprietatea menționată anterior.\par
+Știm că finalSolution este soluție optimă pentru $sum-rest$.\par
+Dacă currentSolution la care adăugăm bancnota 32 este soluție optimă pentru $rest$, atunci suma soluției optime 
+pentru $sum-rest$ adunată cu suma soluției optime pentru rest este soluție optimă pentru sumă.  \par
+BanknoteMaxim32 se asigură că este soluție optimă pentru rest currentSolution folosind lema exchangeArgument32.
 
-  forall currentSolution | isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - 32)
-    ensures isOptimalSolution(solutionsSum(solutionsSum(finalSolution, currentSolution), [0, 0, 0, 0, 0, 1]), sum)
-  {
-    forall someSolution | isValidSolution(someSolution) && isSolution(someSolution, sum)
-      ensures cost(someSolution) >= cost(solutionsSum(solutionsSum(finalSolution, currentSolution), [0, 0, 0, 0, 0, 1])) 
+\begin{lstlisting}
+lemma banknoteMaxim32(rest: int, sum: int, finalSolution: seq <int> )
+    requires rest >= 32
+    requires isValidSolution(finalSolution)
+    requires addOptimRestEqualsOptimSum(rest, sum, finalSolution)
+    ensures addOptimRestEqualsOptimSum(rest - 32, sum, solutionsSum(finalSolution, [0, 0, 0, 0, 0, 1])) 
+{
+    forall currentSolution | isValidSolution(currentSolution) && isSolution(currentSolution, rest - 32)
+      ensures isSolution(solutionsSum(solutionsSum(finalSolution, currentSolution), [0, 0, 0, 0, 0, 1]), sum) 
     {
-      currentSolutionHasCostMin(rest, sum, currentSolution);
+      assert isSolution(solutionsSum(currentSolution, [0, 0, 0, 0, 0, 1]), rest);
     }
-  }
+  
+    forall currentSolution | isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - 32)
+      ensures isOptimalSolution(solutionsSum(solutionsSum(finalSolution, currentSolution), [0, 0, 0, 0, 0, 1]), sum)
+    {
+      forall someSolution | isValidSolution(someSolution) && isSolution(someSolution, sum)
+        ensures cost(someSolution) >= cost(solutionsSum(solutionsSum(finalSolution, currentSolution), [0, 0, 0, 0, 0, 1])) 
+      {
+        exchangeArgument32(rest, sum,  currentSolution);
+      }
+    }
 }
-\end{lstlisting}
-
-\subsection{currentSolutionHasCostMin}
-\begin{lstlisting}
-    lemma currentSolutionHasCostMin(rest: int, sum: int, solution: seq < int > )
-  requires isValidSolution(solution)
-  requires rest >= 32
-  requires isSolution(solution, rest - 32)
-  requires isOptimalSolution(solution, rest - 32)
-  ensures isOptimalSolution(solutionsSum(solution, [0, 0, 0, 0, 0, 1]), rest) 
-{
-  forall someSolution | isValidSolution(someSolution) && isSolution(someSolution, rest)
-    ensures cost(someSolution) >= cost(solutionsSum(solution, [0, 0, 0, 0, 0, 1])) 
-  {
-    exchangeArgument32(rest, sum, someSolution, solution);
-  }
-}
-
 \end{lstlisting}
 
 
 \subsection{exchangeArgument32}
-\begin{lstlisting}
-    
-lemma exchangeArgument32(rest: int, sum: int, currentSolution: seq < int > , optimalSolution: seq < int > )
+Lema exchangeArgument32 presupune că nu este optimă soluția dacă adaugăm bancnota 32 și ajunge la o contradicție.\par
+Știm că soluția e optimă pentru $rest - 32$, dar nu pentru rest, dacă adaugăm bancnota.\par
+Consideră că există o altă soluție optimă pentru rest.\par
+Deoarece nu avem o bancnotă mai mare de 32 cu care am putea înlocui 2 apariții ale acestei bancnote,
+verificăm doar proprietatea descrisă la observație.\par
+Nu există două bancnote de aceeași valoare în soluție, mai mici de 32.\par
+În acest mod știm că soluția presupusă nu poate fi optimă, deoarece, dacă respectă proprietatea
+suma produsă de aceasta nu poate fi egală cu rest. \par
+
+\begin{lstlisting}    
+lemma exchangeArgument32(rest: int, sum: int,  optimalSolution: seq <int> )
     requires 32 <= rest
     requires isValidSolution(optimalSolution)
     requires isOptimalSolution(optimalSolution, rest - 32)
@@ -331,7 +330,6 @@ lemma exchangeArgument32(rest: int, sum: int, currentSolution: seq < int > , opt
                     assert cost(optimalSolution) - 1 < cost(solution);
                     assert false;
                 }
-                assert optimalSolution[i] <= 1;
             }
             assert solutionElementsSum(optimalSolution) <= rest - 1;
             assert isOptimalSolution(solution, rest);
