@@ -213,16 +213,100 @@
     
     
 \section{Problema bancnotei nemărginite superior, 32}
+
+\subsection{Cum se tratează separat cazul 32}
+
 \subsection{banknoteMaxim32}
 \begin{lstlisting}
+lemma banknoteMaxim32(rest: int, sum: int, finalSolution: seq < int > )
+  requires rest >= 32
+  requires isValidSolution(finalSolution)
+  requires addOptimRestEqualsOptimSum(rest, sum, finalSolution)
+  ensures addOptimRestEqualsOptimSum(rest - 32, sum, solutionsSum(finalSolution, [0, 0, 0, 0, 0, 1])) 
+{
+  forall currentSolution | isValidSolution(currentSolution) && isSolution(currentSolution, rest - 32)
+    ensures isSolution(solutionsSum(solutionsSum(finalSolution, currentSolution), [0, 0, 0, 0, 0, 1]), sum) 
+  {
+    assert isSolution(solutionsSum(currentSolution, [0, 0, 0, 0, 0, 1]), rest);
+  }
+
+  forall currentSolution | isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - 32)
+    ensures isOptimalSolution(solutionsSum(solutionsSum(finalSolution, currentSolution), [0, 0, 0, 0, 0, 1]), sum)
+  {
+    forall someSolution | isValidSolution(someSolution) && isSolution(someSolution, sum)
+      ensures cost(someSolution) >= cost(solutionsSum(solutionsSum(finalSolution, currentSolution), [0, 0, 0, 0, 0, 1])) 
+    {
+      currentSolutionHasCostMin(rest, sum, currentSolution);
+    }
+  }
+}
 \end{lstlisting}
 
 \subsection{currentSolutionHasCostMin}
 \begin{lstlisting}
+    lemma currentSolutionHasCostMin(rest: int, sum: int, solution: seq < int > )
+  requires isValidSolution(solution)
+  requires rest >= 32
+  requires isSolution(solution, rest - 32)
+  requires isOptimalSolution(solution, rest - 32)
+  ensures isOptimalSolution(solutionsSum(solution, [0, 0, 0, 0, 0, 1]), rest) 
+{
+  forall someSolution | isValidSolution(someSolution) && isSolution(someSolution, rest)
+    ensures cost(someSolution) >= cost(solutionsSum(solution, [0, 0, 0, 0, 0, 1])) 
+  {
+    exchangeArgument32(rest, sum, someSolution, solution);
+  }
+}
+
 \end{lstlisting}
 
 
 \subsection{exchangeArgument32}
 \begin{lstlisting}
+    
+lemma exchangeArgument32(rest: int, sum: int, currentSolution: seq < int > , optimalSolution: seq < int > )
+    requires 32 <= rest
+    requires isValidSolution(optimalSolution)
+    requires isOptimalSolution(optimalSolution, rest - 32)
+    ensures isOptimalSolution(optimalSolution[5:= optimalSolution[5] + 1], rest) 
+{
+    var solution:= optimalSolution[5:= optimalSolution[5] + 1];
+    var i:= 4;
+    if (!isOptimalSolution(solution, rest)) 
+    {
+        if (optimalSolution[i] > 1) 
+        {
+            var solution:= optimalSolution[i:= optimalSolution[i] - 2];
+            solution:= solution[i + 1:= solution[i + 1] + 1];
+            assert isSolution(solution, rest - 32);
+            assert cost(solution) == cost(optimalSolution) - 1;
+            assert cost(optimalSolution) - 1 < cost(solution);
+            assert false;
+        } 
+        else
+        {
+            while (0 < i)
+                invariant 0 <= i <= 4
+                invariant forall index::4 >= index >= i ==> optimalSolution[index] <= 1 
+            {
+                i:= i - 1;
+                if (optimalSolution[i] > 1) 
+                {
+                    var solution:= optimalSolution[i:= optimalSolution[i] - 2];
+                    solution:= solution[i + 1:= solution[i + 1] + 1];
+                    assert isSolution(solution, rest - 32);
+                    assert cost(solution) == cost(optimalSolution) - 1;
+                    assert cost(optimalSolution) - 1 < cost(solution);
+                    assert false;
+                }
+                assert optimalSolution[i] <= 1;
+            }
+            assert solutionElementsSum(optimalSolution) <= rest - 1;
+            assert isOptimalSolution(solution, rest);
+            assert false;
+        }
+    }
+}
+
 \end{lstlisting}
 

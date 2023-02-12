@@ -18,8 +18,9 @@
 \contentsline {subsection}{\numberline {3.3.5}addValueToIndex}{10}{subsection.3.3.5}%
 \contentsline {subsection}{\numberline {3.3.6}Ultimul pas}{11}{subsection.3.3.6}%
 \contentsline {section}{\numberline {3.4}Problema bancnotei nemărginite superior, 32}{11}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}banknoteMaxim32}{11}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}currentSolutionHasCostMin}{11}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}exchangeArgument32}{11}{subsection.3.4.3}%
-\contentsline {chapter}{Concluzii}{12}{chapter*.2}%
-\contentsline {chapter}{Bibliografie}{13}{chapter*.3}%
+\contentsline {subsection}{\numberline {3.4.1}Cum se tratează separat cazul 32}{11}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}banknoteMaxim32}{11}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}currentSolutionHasCostMin}{12}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}exchangeArgument32}{12}{subsection.3.4.4}%
+\contentsline {chapter}{Concluzii}{15}{chapter*.2}%
+\contentsline {chapter}{Bibliografie}{16}{chapter*.3}%
