@@ -175,7 +175,7 @@ lemma banknoteMaxim(rest: int, sum: int, finalSolution: seq < int > , index: int
   assert forall currentSolution::isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - banknote) ==> isOptimalSolution(solutionsSum(solutionsSum(currentSolution, finalSolution), [0, 0, 0, 0, 0, 0][index:= 1]), sum);
 }
 
-lemma exchangeArgument32(rest: int, sum: int, currentSolution: seq < int > , optimalSolution: seq < int > )
+lemma exchangeArgument32(rest: int, sum: int,  optimalSolution: seq < int > )
   requires 32 <= rest
   requires isValidSolution(optimalSolution)
   requires isOptimalSolution(optimalSolution, rest - 32)
@@ -210,7 +210,6 @@ lemma exchangeArgument32(rest: int, sum: int, currentSolution: seq < int > , opt
           assert cost(optimalSolution) - 1 < cost(solution);
           assert false;
         }
-        assert optimalSolution[i] <= 1;
       }
       assert solutionElementsSum(optimalSolution) <= rest - 1;
       assert isOptimalSolution(solution, rest);
@@ -218,7 +217,6 @@ lemma exchangeArgument32(rest: int, sum: int, currentSolution: seq < int > , opt
     }
   }
 }
-
 
 lemma banknoteMaxim32(rest: int, sum: int, finalSolution: seq < int > )
   requires rest >= 32
@@ -238,7 +236,7 @@ lemma banknoteMaxim32(rest: int, sum: int, finalSolution: seq < int > )
     forall someSolution | isValidSolution(someSolution) && isSolution(someSolution, sum)
       ensures cost(someSolution) >= cost(solutionsSum(solutionsSum(finalSolution, currentSolution), [0, 0, 0, 0, 0, 1])) 
     {
-      exchangeArgument32(rest, sum,  someSolution, currentSolution);
+      exchangeArgument32(rest, sum,  currentSolution);
     }
   }
 }
