@@ -1,15 +1,20 @@
-\lstset{frame=tb,
-	language=C++,
-	aboveskip=3mm,
-	belowskip=3mm,
-	showstringspaces=false,
-	columns=flexible,
-	basicstyle={\small\ttfamily},
-	numbers=none,
-	numberstyle=\tiny,
-	breaklines=true,
-	breakatwhitespace=true,
-	tabsize=3}
+
+\lstset{
+language=csh,
+basicstyle=\footnotesize\ttfamily,
+numbers=left,
+numberstyle=\tiny,
+tabsize=2,
+breaklines=true,
+frame=b,
+showspaces=false,
+showtabs=false,
+commentstyle=\color{green},
+keywordstyle=\color{mauve},
+morekeywords={lemma, method, function, predicate,ensures, requires, assert },
+identifierstyle=\color{black},
+backgroundcolor=\color{cloudwhite},
+}
 
 \chapter{Verificarea formală a problemei}
 
@@ -109,7 +114,6 @@
         } 
           else 
         {
-          //we know the index is 5
           assert index == 5;
         }
       }
@@ -117,6 +121,8 @@
 
 
     \subsection{banknoteMaxim}
+    Metoda maxBanknote este folosită pentru a returna un index cu proprietatea: \par
+     $bancnota_{index} <= rest < bancnota_{index + 1}$  .
     \begin{lstlisting}
     lemma banknoteMaxim(rest: int, sum: int, finalSolution: seq < int > , index: int)
         requires 0 <= index <= 4
@@ -125,14 +131,14 @@
         requires addOptimRestEqualsOptimSum(rest, sum, finalSolution)
         ensures addOptimRestEqualsOptimSum(rest - power(2, index), sum, finalSolution[index:= finalSolution[index] + 1]) 
     {
-    var banknote:= power(2, index);
-    forall currentSolution | isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - banknote)
-        ensures isOptimalSolution(solutionsSum(solutionsSum(currentSolution, finalSolution), [0, 0, 0, 0, 0, 0][index:= 1]), sum) 
-    {
-        assert isSolution(currentSolution[index:= currentSolution[index] + 1], rest);
-        exchangeArgument(rest, currentSolution, index);
-    }
-    assert forall currentSolution::isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - banknote) ==> isOptimalSolution(solutionsSum(solutionsSum(currentSolution, finalSolution), [0, 0, 0, 0, 0, 0][index:= 1]), sum);
+        var banknote:= power(2, index);
+        forall currentSolution | isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - banknote)
+            ensures isOptimalSolution(solutionsSum(solutionsSum(currentSolution, finalSolution), [0, 0, 0, 0, 0, 0][index:= 1]), sum) 
+        {
+            assert isSolution(currentSolution[index:= currentSolution[index] + 1], rest);
+            exchangeArgument(rest, currentSolution, index);
+        }
+        assert forall currentSolution::isValidSolution(currentSolution) && isOptimalSolution(currentSolution, rest - banknote) ==> isOptimalSolution(solutionsSum(solutionsSum(currentSolution, finalSolution), [0, 0, 0, 0, 0, 0][index:= 1]), sum);
     }
     \end{lstlisting}
 
@@ -206,9 +212,17 @@
 
     
     \subsection{Ultimul pas}
-    În final, am descoperit că pentru bancnota 32 am nevoie de o verificare diferită.\par
-    Voi descrie ulterior cum am tratat acest caz.\par
-    -de ce trebuie abordata diferit- 
+    În final, am descoperit că pentru bancnota 32 am nevoie de o verificare diferită. Voi descrie ulterior cum am tratat acest caz.\par
+    $\bullet$ De ce trebuie abordat diferit cazul când bancnota optimă de adăugat este 32?\par
+    Fiecare bancnotă 1,2,4,8 și 16 este mărginită superior de bancnota imediat următoare, datorită felului în care 
+    se alege index-ul în metoda maxBanknote.\par
+    Felul în care abordez cazurile 1,2,4,8 și 16 constă în verificarea faptului că 
+    nu avem încă o bancnotă de aceeași valoare în soluție deja, altfel ar fi mai eficient să avem  
+    o bancnotă de valoarea imediat următoare și să scăpăm de bancnota deja existentă din soluție.\par
+    În cazul bancnotei 32 nu există o altă bancnotă de valoare mai mare cu care putem să înlocuim apariția bancnotei 32,
+    așadar a trebuit să demonstrez că adăugând bancnota 32 la soluția găsită până în prezent se generează o soluție optimă pentru 
+    pentru restul dat până în prezent.   
+    
     
     
     

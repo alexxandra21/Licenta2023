@@ -96,7 +96,6 @@ method maxBanknote(sum: int) returns(index: int)
   } 
     else 
   {
-    //we know the index is 5
     assert index == 5;
   }
 }
