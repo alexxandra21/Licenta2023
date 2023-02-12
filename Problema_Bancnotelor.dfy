@@ -127,12 +127,8 @@ lemma exchangeArgument(rest: int, currentSolution: seq < int > , index: int)
       var optimalSolution:| isValidSolution(optimalSolution) && isSolution(optimalSolution, rest) &&
         isOptimalSolution(optimalSolution, rest) && cost(optimalSolution) < cost(solution);
 
-      assert cost(solution) == cost(currentSolution) + 1;
-      assert isOptimalSolution(optimalSolution, rest);
-
       if (optimalSolution[index] -1 >= 0) 
       {
-        assert optimalSolution[index]-1 >= 0;
         var betterSolution:= addValueToIndex(optimalSolution,-1,index);
         assert isSolution(betterSolution, rest - banknote);
         assert cost(betterSolution) == cost(optimalSolution) - 1;

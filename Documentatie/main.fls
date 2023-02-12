@@ -740,6 +740,8 @@ INPUT main.aux
 INPUT .\main.out
 INPUT .\main.out
 INPUT C:\Miktex\fonts\enc\dvips\base\8r.enc
+INPUT C:\Miktex\fonts\type1\public\amsfonts\cm\cmex10.pfb
+INPUT C:\Miktex\fonts\type1\public\amsfonts\cm\cmex10.pfb
 INPUT C:\Miktex\fonts\type1\public\amsfonts\cm\cmmi12.pfb
 INPUT C:\Miktex\fonts\type1\public\amsfonts\cm\cmmi12.pfb
 INPUT C:\Miktex\fonts\type1\public\amsfonts\cm\cmmi8.pfb
@@ -750,6 +752,8 @@ INPUT C:\Miktex\fonts\type1\public\amsfonts\cm\cmr8.pfb
 INPUT C:\Miktex\fonts\type1\public\amsfonts\cm\cmr8.pfb
 INPUT C:\Miktex\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Miktex\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Miktex\fonts\type1\public\amsfonts\cm\cmsy8.pfb
+INPUT C:\Miktex\fonts\type1\public\amsfonts\cm\cmsy8.pfb
 INPUT C:\Miktex\fonts\type1\urw\courier\ucrr8a.pfb
 INPUT C:\Miktex\fonts\type1\urw\courier\ucrr8a.pfb
 INPUT C:\Miktex\fonts\type1\urw\palatino\uplb8a.pfb
