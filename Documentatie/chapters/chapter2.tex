@@ -57,9 +57,21 @@ backgroundcolor=\color{cloudwhite},
     asigurând faptul că suma soluțiilor locale creează soluția finală optimă.\par
     
 \section{Pașii verificării}
+Am implementat algoritmul Greedy care rezolva Problema Bancnotelor cu bancnote puteri ale lui 2, 
+apoi am adăugat treptat condițiile care garantează că soluția găsită este soluție optimă.
     \subsection{banknoteMinimum}
-    Am implementat algoritmul Greedy care rezolva Problema Bancnotelor cu bancnote puteri ale lui 2, 
-    apoi am adăugat treptat condițiile care garantează că soluția găsită este soluție optimă.\par
+    Am implementat metoda principală banknoteMinimum care returnează soluția corectă pentru o sumă dată ca input
+    și se asigură că produce o soluție validă, care produce suma corectă si optimă.\par
+    Această metodă folosește o buclă, în care, la fiecare iterație, adaugă o bancnotă în soluție.\par
+    În primă fază calculează bancnota maximă ce poate fi dată ca rest din restul rămas de dat, cu ajutorul funcției 
+    maxBanknote și funcției power, apoi folosește o lemă pentru a demonstra că soluția adunată cu bancnota aleasă, 
+    împreună cu soluția optimă care există pentru restul rămas de dat - bancnota aleasă, va genera o soluție optimă 
+    pentru întreaga sumă. Această demonstrație se realizează cu ajutorul lemei banknoteMaxim sau banknoteMaxim32 în 
+    funcție de bancnota aleasă. 
+    În final adaugăm bancnota în soluție cu ajutorul funcției addValueToIndex și scădem din restul de dat bancnota 
+    adaugată în sumă.
+    Proprietățile necesare unei soluții optime se păstreaza pe parcursul buclei cu ajutorul invariantelor.
+     
     \begin{lstlisting}
     method banknoteMinimum(sum: int) returns(solution: seq < int > )
         requires sum >= 0
@@ -92,6 +104,7 @@ backgroundcolor=\color{cloudwhite},
         }
     }
     \end{lstlisting}
+
     \subsection{maxBanknote}
     Pentru a alege bancnota cea mai mare am creat funcția maxBanknote.\par
     \begin{lstlisting}

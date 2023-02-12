@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.2.7)  12 FEB 2023 18:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.2.7)  12 FEB 2023 18:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -366,7 +366,7 @@ l.51     \input{front/declaration2}
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.26 ...ne {chapter}{Bibliografie}{15}{chapter*.3}
+l.26 ...ne {chapter}{Bibliografie}{16}{chapter*.3}
                                                   % [3
 
 ])
@@ -405,31 +405,31 @@ Package pdftex.def Info: images//verification_schema.png  used on input line 45.
 (pdftex.def)             Requested size: 455.24411pt x 269.99991pt.
  [4
 
-] [5 <./images//verification_schema.png>] [6] [7] [8] [9]
-Overfull \hbox (15.10457pt too wide) in paragraph at lines 217--218
+] [5 <./images//verification_schema.png>] [6] [7] [8] [9] [10]
+Overfull \hbox (15.10457pt too wide) in paragraph at lines 230--231
 []\OT1/ppl/m/n/12 Fiecare banc-not[]a 1,2,4,8 []i 16 este m[]arginit[]a su-pe-rior de banc-nota ime-diat urm[]atoare,
  []
 
-[10] [11] [12]) (chapters/conclusions.tex [13]) (chapters/bibliography.tex [14
+[11] [12] [13]) (chapters/conclusions.tex [14]) (chapters/bibliography.tex [15
 
-]) [15
+]) [16
 
 ] (main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 39CE4ED93101DFA3F5431881D4FBD8E5;4337.
  ) 
 Here is how much of TeX's memory you used:
- 12180 strings out of 476374
- 190273 string characters out of 5805258
- 1929340 words of memory out of 5000000
+ 12181 strings out of 476374
+ 190280 string characters out of 5805258
+ 1934340 words of memory out of 5000000
  32091 multiletter control sequences out of 15000+600000
  534571 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,6n,76p,856b,1958s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {C:/Miktex/fonts/enc/dvips/base/8r.enc}<C:/Miktex/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Miktex/fonts/type1/urw/courier/ucrr8a.pfb><C:/Miktex/fonts/type1/urw/palatino/uplb8a.pfb><C:/Miktex/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on main.pdf (20 pages, 232588 bytes).
+Output written on main.pdf (21 pages, 234493 bytes).
 PDF statistics:
- 546 PDF objects out of 1000 (max. 8388607)
- 273 named destinations out of 1000 (max. 500000)
+ 550 PDF objects out of 1000 (max. 8388607)
+ 274 named destinations out of 1000 (max. 500000)
  211 words of extra memory for PDF output out of 10000 (max. 10000000)
 
