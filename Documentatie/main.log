@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.2.7)  12 FEB 2023 23:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.2.7)  14 FEB 2023 23:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -329,7 +329,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <14.4> on input line 6.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 6.
-<images//logoFii.png, id=111, 193.47281pt x 188.95593pt>
+<images//logoFii.png, id=79, 193.47281pt x 188.95593pt>
 File: images//logoFii.png Graphic file (type png)
 <use images//logoFii.png>
 Package pdftex.def Info: images//logoFii.png  used on input line 13.
@@ -362,73 +362,67 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has be
 <to be read again> 
                    \relax 
 l.51     \input{front/declaration2}
-                                    [2] (main.toc
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.27 ...sline {chapter}{Concluzii}{15}{chapter*.2}
-                                                  % [3
-
-])
+                                    [2] (main.toc)
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
- (chapters/chapter0.tex [1]
+ (chapters/chapter0.tex [1
+
+]
 Capitolul 1.
 
 Overfull \hbox (34.79437pt too wide) in paragraph at lines 7--10
 []\OT1/ppl/m/n/12 Verificarea este po-si-bil[]a da-to-rit[]a ca-rac-te-ris-ti-ci-lor spe-ci-fice lim-ba-ju-lui pre-cum precondi[]ii,
  []
 
-) (chapters/chapter1.tex (C:\Miktex\tex/latex/listings\lstlang1.sty
-File: lstlang1.sty 2020/03/24 1.8d listings language file
-) (C:\Miktex\tex/latex/listings\lstmisc.sty
-File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
-) [2
+) (chapters/chapter1.tex [2
 
 ]
 Capitolul 2.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <24.88> on input line 14.
-) (chapters/chapter2.tex [3
+[3
 
-]
+]) (chapters/chapter2.tex [4]
 Capitolul 3.
-) (chapters/chapter3.tex [4
-
-]
-Capitolul 4.
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 25.
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 26.
 (C:\Miktex\tex/latex/psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-<images//verification_schema.png, id=184, 814.04124pt x 482.80376pt>
+<images//verification_schema.png, id=141, 814.04124pt x 482.80376pt>
 File: images//verification_schema.png Graphic file (type png)
 <use images//verification_schema.png>
-Package pdftex.def Info: images//verification_schema.png  used on input line 45.
+Package pdftex.def Info: images//verification_schema.png  used on input line 46.
 (pdftex.def)             Requested size: 455.24411pt x 269.99991pt.
  [5
 
-] [6 <./images//verification_schema.png>] [7] [8] [9] [10] [11] [12] [13]) (chapters/conclusions.tex [14]) (chapters/bibliography.tex [15
+] [6 <./images//verification_schema.png>] [7] [8] [9] [10] [11] [12] [13]) (chapters/conclusions.tex [14]
+Overfull \hbox (1.01633pt too wide) in paragraph at lines 11--12
+[]\OT1/ppl/m/n/12 Parcurgerea aces-tor etape m-a f[]acut s[]a apro-fun-dez no[]iunea de solu[]ie []i s[]a []^^Pn[]eleg
+ []
 
-]) [16
+) (chapters/bibliography.tex [15
+
+]
+LaTeX Info: Symbol \textasciibreve not provided by
+            font family ppl in TS1 encoding.
+            Default family used instead on input line 15.
+) [16
 
 ] (main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 7540839CD17A0362FD9E4E7E92586FE9;4878.
+(rerunfilecheck)             Checksum: 455B17A1C9EA9DE317CCBCBCC1796CA7;3173.
  ) 
 Here is how much of TeX's memory you used:
- 12160 strings out of 476374
- 190024 string characters out of 5805258
- 1929340 words of memory out of 5000000
- 32091 multiletter control sequences out of 15000+600000
- 534571 words of font info for 85 fonts, out of 8000000 for 9000
+ 12070 strings out of 476374
+ 188480 string characters out of 5805258
+ 2045340 words of memory out of 5000000
+ 32015 multiletter control sequences out of 15000+600000
+ 533994 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,76p,856b,1956s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{C:/Miktex/fonts/enc/dvips/base/8r.enc}<C:/Miktex/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Miktex/fonts/type1/urw/courier/ucrr8a.pfb><C:/Miktex/fonts/type1/urw/palatino/uplb8a.pfb><C:/Miktex/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on main.pdf (21 pages, 256715 bytes).
+ 75i,6n,76p,856b,1952s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\alexandra\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk>{C:/Miktex/fonts/enc/dvips/base/8r.enc}<C:/Miktex/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Miktex/fonts/type1/urw/courier/ucrr8a.pfb><C:/Miktex/fonts/type1/urw/palatino/uplb8a.pfb><C:/Miktex/fonts/type1/urw/palatino/uplr8a.pfb>
+Output written on main.pdf (20 pages, 248171 bytes).
 PDF statistics:
- 539 PDF objects out of 1000 (max. 8388607)
- 250 named destinations out of 1000 (max. 500000)
- 227 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 500 PDF objects out of 1000 (max. 8388607)
+ 242 named destinations out of 1000 (max. 500000)
+ 163 words of extra memory for PDF output out of 10000 (max. 10000000)
 

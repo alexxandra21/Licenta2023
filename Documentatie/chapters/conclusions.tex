@@ -1,22 +1,16 @@
-\chapter*{Pașii parcurși pentru finalizarea verificării} 
+\chapter*{Concluzie} 
 \addcontentsline{toc}{chapter}{Concluzii}
 
-Pe parcursul verificării algoritmului am întâlnit o multitudine de erori și probleme la care știam exact ce anume nu 
-funcționează cum m-am așteptat, ceea ce m-a adus la pasul de a rezolva problema, fără sa pierd timp căutând cauza ei.\par
-Deoarece Dafny este un limbaj intuitiv și ușor de înțeles, pas cu pas m-am apropiat de rezultatul dorit, însă forma în care
-această verificare se află azi nu este rezultatul la care mă așteptam inițial.\par
-Inițial am abordat fiecare caz în parte într-un mod diferit, însă acest lucru a rezultat  într-un număr exagerat de 
-if-uri. Pentru a testa că fiecare caz în parte nu este optim înafară de cel propus de algoritm, trebuia să parcurg
-toate posibilitățile de a forma o soluție și să demonstrez că nu au cost minim. \par
-Din dorința de a optimiza metoda de verificare am observat proprietatea discutată anterior, toate soluțiile optime
-au maxim câte o bancnotă 1,2,4,8 și 16.\par
-Astfel, am început să caut o modalitate de a verifica în mod dinamic cat mai multe cazuri simultan și am ajuns la o
-formă apropiată de cea curentă a verificării.\par
-Ulterior am realizat că foloseam multe funcții cu scopuri similare și am redus numărul acestora.
-De asemenea, am șters toate assert-urile care nu erau necesare, deoarece foloseam multe pentru a mă convinge că 
-ceea ce implementam se verifica din aproape în aproape.\par
-În final am ajuns la un sfert din liniile de cod care se verificau inițial. \par
-Parcurgerea acestor pași m-a făcut să aprofundez noțiunea de soluție și să înțeleg în amănunt formarea acesteia prin
+În cadrul acestei lucrări am realizat verificarea formală a unei implementări a metodei greedy ce rezolvă problema 
+bancnotelor cu bancnote puteri ale lui 2.
+Una dintre dificultățile întâlnite în acest proces a fost crearea invariantului care menține proprietatea de soluție
+optimă, așa a apărut predicatul addOptimRestEqualsOptimSum.
+Acest predicat afirmă că o soluție optimă pentru o sumă x adunată cu o soluție pentru y are ca rezultat o soluție optimă 
+pentru suma $x+y$. Astfel, secvența ce reprezintă soluția care se construiește pe parcursul buclei are garanția că 
+atât timp cât se adună cu soluții locale optime, în final, vom avea o soluție finală optimă.\par
+Parcurgerea acestor etape m-a făcut să aprofundez noțiunea de soluție și să înțeleg în amănunt formarea acesteia prin
 metoda Greedy.\par
-Pe viitor îmi propun să caut, dacă există, o proprietate pentru o soluție optimă care să se aplice pentru orice sistem de bancnote.
+Pe viitor îmi propun să găsesc o modalitate de a unifica metodele banknoteMaxim pentru a funcționa pentru orice caz.
+Un alt lucru interesant de făcut în viitor, ar fi o găsirea unei proprietăți care să se aplice pentru orice sistem 
+de bancnote, pentru a verifica faptul că produce o soluție optimă.
  

@@ -1,19 +1,26 @@
 
 \chapter{Context} 
 
-\section{Limbajul Dafny} 
+ 
 Dafny este un limbaj de programare și verificare, capabil să verifice corectitudinea
- funcțională a unui program.\par
+funcțională a unui program.\par
 Verificarea este posibilă datorită caracteristicilor specifice limbajului precum precondiții, postcondiții, 
 invariante, ș.a.m.d. De asemenea, verificatorul Dafny are grijă ca adnotările făcute să se îndeplinească,
 astfel acesta ne scapă de povara de a scrie cod fără erori, în schimbul scrierii de adnotări fără erori.
-
-\section{Algoritmul Greedy pentru Problema Bancnotelor} 
-Problema Bancnotelor are ca scop reprezentarea unei sume într-un număr minim posibil de bancnote.\par
-Metoda Greedy face alegerea cea mai bună la fiecare pas, construind soluția finală.
+ 
+Problema bancnotelor are ca scop reprezentarea unei sume într-un număr minim posibil de bancnote.\par
+Metoda greedy face alegerea cea mai bună la fiecare pas, construind soluția finală.
 Verificarea formală in Dafny a problemei bancnotelor demonstrează faptul că soluția construită este optimă
 pentru orice sumă dată ca input. \par
-Reprezentarea soluției :
+Reprezentarea folosită pentru soluție este :
 $ banknote_{1}:= 1 < banknote_{2} < ... < banknote_{n} $. 
 
+Anterior am menționat forma generală a problemei bancnotelor.\par
+Bancnotele posibile în problema bancnotelor cu bancnote puteri ale lui 2 sunt: 
+$[1, 2, 4, 8, 16, 32]$ . 
+
+Datorită bancnotelor care sunt puteri ale lui 2, dacă avem mai mult de o bancnotă de valoare mai mică decât 32,
+putem înlocui 2 bancnote de acea valoare cu o bancnotă de valoarea următoare și am obține o soluție cu cost mai mic.\par
+Astfel, am descoperit proprietatea: 
+$  forall$ $i :: 0 <= i <= 4 ==> s[i] <= 1 $
 

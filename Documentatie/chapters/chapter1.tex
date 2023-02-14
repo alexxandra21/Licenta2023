@@ -1,26 +1,24 @@
-\lstset{frame=tb,
-	language=C++,
-	aboveskip=3mm,
-	belowskip=3mm,
-	showstringspaces=false,
-	columns=flexible,
-	basicstyle={\small\ttfamily},
-	numbers=none,
-	numberstyle=\tiny,
-	breaklines=true,
-	breakatwhitespace=true,
-	tabsize=3}
+\chapter{Reprezentarea problemei în Dafny}
 
-\chapter{Particularități ale problemei alese}
+
+\section{ Reprezentarea datelor de intrare }
+În cazul problemei discutate datele de intrare sunt reprezentate de o variabilă \textbf{sum} ce reprezintă
+ suma pentru care se verifică dacă se produce soluția finală.
+
+\section{ Reprezentarea datelor de ieșire}
+Datele de ieșire sunt reprezentate de o secvență de forma : \par
+$\bullet$ soluție  = { $b_{0}, b_{1}, b_{2}, b_{3}, b_{4}, b_{5}$} , unde $\sum_{k=0}^{5} b_{k} \cdot 2^{k} = suma $
+
+\section{ Structuri de date folosite}
+-solutia reprezentata ca secventa
+-cele 3 predicate explicate + exemple cod
+\subsection{Condiții ca o soluție finală să fie optimă}
+    $\bullet$ Pentru a avea o soluție optimă trebuie să avem o soluție validă (cu 6 elemente), care produce suma corectă
+     și care are costul cel mai mic.\par
+    $\bullet$ Pentru a avea o soluție optimă finală, pe parcursul construirii soluției, în buclă, trebuie menținută proprietatea
+     de a alege soluția optimă locală pentru rest, iar suma soluțiilor optime locale să fie soluție optimă pentru sumă.\par
+    $\bullet$ Soluția formată dintr-o bancnotă, cea aleasă în iterația curentă, produce o soluție optimă pentru suma 
+    de valoare bancnotă, asigurând faptul că avem o soluție optimă locală.\par
+    $\bullet$ O soluție optimă pentru suma $x$, adunată cu o soluție optimă pentru suma $y$ creează o soluție optimă pentru suma $x+y$, 
+    asigurând faptul că suma soluțiilor locale creează soluția finală optimă.\par
     
-\section{Problema Bancnotelor cu bancnote puteri ale lui 2}
-Anterior am menționat forma generală a Problemei Bancnotelor.\par
-Bancnotele posibile în "Problema Bancnotelor cu bancnote puteri ale lui 2" sunt: 
-$[1, 2, 4, 8, 16, 32]$ . 
-
-\section{Observații}
-    Datorită bancnotelor care sunt puteri ale lui 2, dacă avem mai mult de o bancnotă de valoare mai mică decât 32,
-    putem înlocui 2 bancnote de acea valoare cu o bancnotă de valoarea următoare și am obține o soluție cu cost mai mic.\par
-    Astfel, am descoperit proprietatea: 
-    $  forall$ $i :: 0 <= i <= 4 ==> s[i] <= 1 $
-
