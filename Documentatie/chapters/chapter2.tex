@@ -44,15 +44,15 @@ backgroundcolor=\color{cloudwhite},
     \vspace{1cm}
     \begin{center}
         \includegraphics[width=1.0\textwidth]{verification_schema.png}\par
+        \caption{Figura 1: o schemă explicativă a apelurilor de funcții și leme în cadrul verificării}
     \end{center}
-    În schema de mai sus am exemplificat modul în care funcțiile, lemele și metodele se apelează una pe cealaltă pentru a demonstra faptul că soluția găsită este soluție optimă.\par
-
+   
     
 \section{Etapele verificării}
 Am implementat algoritmul greedy care rezolva problema bancnotelor cu bancnote puteri ale lui 2, 
 apoi am adăugat treptat condițiile care garantează că soluția găsită este soluție optimă.
-    \subsection{banknoteMinimum}
-    BanknoteMinimum returnează soluția optimă pentru o sumă dată ca input.\par
+    \subsection{Metoda banknoteMinimum}
+    Metoda banknoteMinimum returnează soluția optimă pentru o sumă dată ca input.\par
     Această metodă folosește o buclă, în care, la fiecare iterație, se adaugă o bancnotă în soluție.\par
     În primă fază calculează bancnota cea mai mare ce poate fi dată ca rest, cu ajutorul funcției maxBanknote și funcției 
     power.\par
@@ -94,7 +94,7 @@ apoi am adăugat treptat condițiile care garantează că soluția găsită este
     }
     \end{lstlisting}
 
-    \subsection{maxBanknote}
+    \subsection{Metoda maxBanknote}
     Metoda maxBanknote este folosită pentru a returna un index cu proprietatea: \par
      $bancnota_{index} <= rest < bancnota_{index + 1}$  .\par
     \begin{lstlisting}
@@ -123,7 +123,7 @@ apoi am adăugat treptat condițiile care garantează că soluția găsită este
     \end{lstlisting}
 
 
-    \subsection{banknoteMaxim}
+    \subsection{Lema banknoteMaxim}
     Lema banknoteMaxim este folosită pentru a demonstra faptul că dacă adăugam o bancnotă în soluția pe care o 
     construim, în continuare suma acestei soluții cu soluția optimă pentru $ rest - bancnota$ va produce soluția 
     optimă pentru suma întreagă.\par
@@ -149,7 +149,7 @@ apoi am adăugat treptat condițiile care garantează că soluția găsită este
     }
     \end{lstlisting}
 
-    \subsection{exchangeArgument}
+    \subsection{Lema exchangeArgument}
     Lema exchangeArgument presupune că nu este optimă soluția dacă adaugăm bancnota aleasă și ajunge la o contradicție.
     Știm că soluția e optimă pentru $rest - bancnota$, dar nu pentru rest, dacă adaugăm bancnota.\par
     Consideră că există o altă soluție optimă pentru rest.\par
@@ -219,8 +219,8 @@ lemma exchangeArgument(rest: int, currentSolution: seq <int> , index: int)
     \end{lstlisting}
         
     
-\subsection{banknoteMaxim32}
-BanknoteMaxim32 demonstrează proprietatea menționată anterior.\par
+\subsection{Lema banknoteMaxim32}
+Lema banknoteMaxim32 demonstrează proprietatea menționată anterior.\par
 Știm că finalSolution este soluție optimă pentru $sum-rest$.\par
 Dacă currentSolution la care adăugăm bancnota 32 este soluție optimă pentru $rest$, atunci suma soluției optime 
 pentru $sum-rest$ adunată cu suma soluției optime pentru rest este soluție optimă pentru sumă.  \par
@@ -252,7 +252,7 @@ lemma banknoteMaxim32(rest: int, sum: int, finalSolution: seq <int> )
 \end{lstlisting}
 
 
-\subsection{exchangeArgument32}
+\subsection{Lema exchangeArgument32}
 Lema exchangeArgument32 presupune că nu este optimă soluția dacă adaugăm bancnota 32 și ajunge la o contradicție.\par
 Știm că soluția e optimă pentru $rest - 32$, dar nu pentru rest, dacă adaugăm bancnota.\par
 Consideră că există o altă soluție optimă pentru rest.\par
