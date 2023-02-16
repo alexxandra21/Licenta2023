@@ -21,8 +21,9 @@ Figura 1: O schemă explicativă a apelurilor de funcții și leme în cadrul ve
     Metoda banknoteMinimum este metoda principală folosită pentru a returna soluția optimă pentru o sumă dată ca 
     input.\par
     Această metodă are ca precondiții faptul că suma este pozitivă, iar ca postcondiții avem cele 3 predicate menționate 
-    anterior care asigură optimalitatea unei soluții. Metoda folosește o buclă, în care, la fiecare iterație, se 
-    adaugă o bancnotă în soluție. Invarianții prezenți în while au rolul de a menține proprietatea de optimalitate 
+    anterior care asigură optimalitatea unei soluții.\par
+    Metoda folosește o buclă, în care, la fiecare iterație, se adaugă o bancnotă în soluție.\par
+    Invarianții prezenți în while au rolul de a menține proprietatea de optimalitate 
     pe parcursul construirii soluției, astfel că la orice pas soluția este optimă pentru $suma-rest$ de la momentul respectiv.\par
     În primă fază calculează bancnota cea mai mare ce poate fi dată ca rest, cu ajutorul funcției maxBanknote și funcției 
     power.\par
@@ -66,9 +67,10 @@ Figura 1: O schemă explicativă a apelurilor de funcții și leme în cadrul ve
     \subsection{Metoda maxBanknote}
     Metoda maxBanknote este folosită pentru a returna un index cu proprietatea: \par
      $bancnota_{index} <= rest < bancnota_{index + 1}$  .\par
-     Pentru a returna un index care respectă propietatea avem postcondiția ca indexul să se afle în range-ul secvenței, 
-     doi la puterea index să fie mai mic decât suma și faptul că un index nu poate fi mai mare decât s-a calculat fără 
-     depăși suma.
+     Avem postcondițiile următoare: indexul să se afle în range-ul secvenței, bancnota corespunzătoare indexului să fie mai mică decât suma,
+     și un index nu poate fi mai mare decât a fost calculat fără depăși suma.
+     Aceste postcondiții au fost necesare pentru a demonstra faptul că indexul returnat este întradevăr corespunzător celei
+     mai mari bancnote care poate fi dată rest pentru sum.
     \begin{lstlisting}
       method maxBanknote(sum: int) returns(index: int)
         requires sum > 0
@@ -102,9 +104,9 @@ Figura 1: O schemă explicativă a apelurilor de funcții și leme în cadrul ve
     Pentru a demonstra acest lucru avem nevoie să știm că dacă în soluția curentă, optimă pentru $ rest - bancnota$  
     adaugăm bancnota aceasta devine optimă pentru $rest$. Acest lucru este demonstrat cu ajutorul lemei exchangeArgument, respectiv exchangeArgument32.
     Cele doua leme sunt similare așa că voi da exemplu de cod doar pentru una dintre ele.\par
-    Aceaste lemme au nevoie ca indexul să se afle în range și ales conform metodei maxBanknote, soluția calculată până 
+    Aceste lemme au nevoie ca indexul să se afle în range și să fie ales conform metodei maxBanknote, soluția calculată până 
     în prezent să fie validă și să respecte predicatul addOptimRestEqualsOptimSum, așadar acestea sunt precondițiile.
-    Ceea ce asigură această metodă este că predicatul addOptimRestEqualsOptimSum este valid și pentru $rest - bancnota_aleasa$, 
+    Această metodă asigură că predicatul addOptimRestEqualsOptimSum este valid și pentru $rest $ dacă scădem bancnota aleasă din rest, 
     de aceea este postcondiție.
     \begin{lstlisting}
     lemma banknoteMaxim(rest: int, sum: int, finalSolution: seq <int> , index: int)
@@ -129,17 +131,18 @@ Figura 1: O schemă explicativă a apelurilor de funcții și leme în cadrul ve
     Lema exchangeArgument, respectiv exchangeArgument32, presupune că nu este optimă soluția dacă adaugăm bancnota aleasă și ajunge la o contradicție.
     Știm că soluția e optimă pentru $rest - bancnota$, dar nu pentru rest, dacă adaugăm bancnota.\par
     Consideră că există o altă soluție optimă pentru rest.\par
-    Următoarea verificare este specifică cazurilor $1,2,4,8,16$.
-    Verificăm în presupusa soluție pentru rest că nu avem bancnota în soluție deja, altfel acea presupusă 
-    $\bullet solutie - bancnota$ are cost mai mic decât soluția noastră care e optimă pentru $rest - bancnota$, contradicție.
-    Apoi verificăm invariantul explicat în subsecțiunea 2.3.1 .\par
+    Următoarea verificare este specifică cazurilor $1,2,4,8,16$.\par
+    $\bullet $ Verificăm în presupusa soluție pentru rest că nu avem bancnota în soluție deja, altfel dacă din acea presupusă 
+     solutie am scădea bancnota, atunci am avea un cost mai mic decât costul soluției noastre care e optimă pentru 
+     $rest - bancnota$ din precondiție, deci avem o contradicție.
+    Ulterior, verificăm demonstrăm că invariantul explicat în subsecțiunea 2.3.1 se menține pe parcursul unei bucle.\par
     Nu există două bancnote de aceeași valoare în soluție, mai mici de 32.\par
     În acest mod știm că soluția presupusă nu poate fi optimă, deoarece, dacă respectă proprietatea
     suma produsă de aceasta nu poate fi egală cu rest. \par
     Deoarece :\par
     $\bullet \sum_{k=0}^{index-1} 2^{k} = 2^{index}-1 $\par
     $\bullet rest > = 2^{index} $ \par
-    Deci presupusa soluție pentru rest nu poate fi egală decât cu cel mult $rest-1$, astfel nu poate fi soluție optimă și se ajunge la o contradicție. 
+    Deci presupusa soluție pentru rest nu poate fi egală decât cu cel mult $rest- 1$, astfel nu poate fi soluție optimă și se ajunge la o contradicție. 
     Precondițiile și postcondițiile necesare pentru acestor lemme sunt aceleași ca în lemma banknoteMaxim, respectiv banknoteMaxim32.\par
     Lemma exchangeArgument este o lemă tipică algoritmilor greedy care se bazează pe ideea că modificând progresiv 
     dintr-o soluție produsă de orice alt algoritm într-o soluție produsă de algoritmul greedy, dacă folosim un mod 
@@ -201,11 +204,11 @@ lemma exchangeArgument(rest: int, currentSolution: seq <int> , index: int)
     
 
 \subsection{Funcția addValueToIndex}
-Funcția addValueToIndex este folosită pentru a adăuga valoarea dorită la indexul dorit în soluție.\par
+Funcția addValueToIndex este folosită pentru a adăuga unui element din soluție o valoare, folosindu-ne de index-ul acestuia.\par
 Este utilă pentru construirea soluțiilor.\par
-Aceasta are drept precondiții pentru modificarea corectă a sumei, index-ul să fie în range, soluția să fie validă, 
-valoarea adaugată plus valoarea inițială a elementului din secvență să nu devină negativă.\par
-Postcondițiile acestei funcții ne asigură o soluție validă în urma adaugării și faptul că valoarea sumei pe care 
+Aceasta are drept precondiții pentru modificarea corectă a sumei faptul că index-ul trebuie să fie în range, soluția să fie validă și
+faptul că valoarea adaugată plus valoarea inițială a elementului din secvență nu reprezintă un număr negativ.\par
+Postcondițiile acestei funcții ne asigură faptul că avem o soluție validă în urma adaugării și faptul că valoarea sumei pe care 
 o reprezintă soluția a crescut cu valoarea la care ne așteptam.\par
 \begin{lstlisting}
 function method addValueToIndex(solution: seq<int>, value: int, index: int): seq<int>
