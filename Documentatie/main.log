@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.2.7)  15 FEB 2023 01:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.2.7)  16 FEB 2023 04:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -224,6 +224,12 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
 \Hy@SectionHShift=\skip50
+) (C:\Miktex\tex/latex/natbib\natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip51
+\bibsep=\skip52
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count284
 ) (C:\Miktex\tex/latex/graphics\color.sty
 Package: color 2022/01/06 v1.3d Standard LaTeX Color (DPC)
  (C:\Miktex\tex/latex/graphics-cfg\color.cfg
@@ -233,37 +239,37 @@ Package color Info: Driver file: pdftex.def on input line 149.
  (C:\Miktex\tex/latex/graphics\mathcolor.ltx)) (C:\Miktex\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
-Package color Info: Redefining color red on input line 18.
-Package color Info: Redefining color blue on input line 19.
-Package color Info: Redefining color green on input line 20.
-LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 41.
+Package color Info: Redefining color red on input line 25.
+Package color Info: Redefining color blue on input line 26.
+Package color Info: Redefining color green on input line 27.
+LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 48.
  (C:\Miktex\tex/latex/psnfss\ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 ) (C:\Miktex\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count284
+\l__color_backend_stack_int=\count285
 \l__pdf_internal_box=\box53
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -301,16 +307,16 @@ LaTeX Font Info:    ... okay on input line 41.
 
 (C:\Miktex\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count285
+\scratchcounter=\count286
 \scratchdimen=\dimen160
 \scratchbox=\box54
-\nofMPsegments=\count286
-\nofMParguments=\count287
+\nofMPsegments=\count287
+\nofMParguments=\count288
 \everyMPshowfont=\toks21
-\MPscratchCnt=\count288
+\MPscratchCnt=\count289
 \MPscratchDim=\dimen161
-\MPnumerator=\count289
-\makeMPintoPDFobject=\count290
+\MPnumerator=\count290
+\makeMPintoPDFobject=\count291
 \everyMPtoPDFconversion=\toks22
 ) (C:\Miktex\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -318,8 +324,9 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (C:\Miktex\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-\c@lstlisting=\count291
-Package hyperref Info: Link coloring OFF on input line 41.
+\c@lstlisting=\count292
+Package hyperref Info: Link coloring OFF on input line 48.
+ (main.out) (main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
@@ -328,7 +335,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <14.4> on input line 6.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 6.
-<images//logoFii.png, id=3, 193.47281pt x 188.95593pt>
+<images//logoFii.png, id=67, 193.47281pt x 188.95593pt>
 File: images//logoFii.png Graphic file (type png)
 <use images//logoFii.png>
 Package pdftex.def Info: images//logoFii.png  used on input line 13.
@@ -358,89 +365,78 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.50     \input{front/declaration1}
+l.77     \input{front/declaration1}
                                     [1] (front/declaration2.tex)
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.51     \input{front/declaration2}
-                                    [2]
-No file main.toc.
+l.78     \input{front/declaration2}
+                                    [2] (main.toc)
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
-(chapters/chapter0.tex [1
+ (chapters/chapter0.tex [1
 
 ]
 Capitolul 1.
-
-Overfull \hbox (34.79437pt too wide) in paragraph at lines 7--10
-[]\OT1/ppl/m/n/12 Verificarea este po-si-bil[]a da-to-rit[]a ca-rac-te-ris-ti-ci-lor spe-ci-fice lim-ba-ju-lui pre-cum precondi[]ii,
- []
-
-
-Overfull \hbox (47.67555pt too wide) in paragraph at lines 19--21
-[]\OT1/ppl/m/n/12 Bancnotele po-si-bile []^^Pn pro-blema banc-no-te-lor cu $\OT1/cmr/m/n/12 2[]$ \OT1/ppl/m/n/12 sis-tem de banc-note sunt: $\OT1/cmr/m/n/12 [1\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 4\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 8\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 16\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 32]$
- []
-
-) (chapters/chapter1.tex [2
-
-]
-Capitolul 2.
-[3
-
-]) (chapters/chapter2.tex [4]
-Capitolul 3.
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 26.
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 13.
 (C:\Miktex\tex/latex/psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-<images//verification_schema.png, id=53, 814.04124pt x 482.80376pt>
+) [2
+
+]
+Overfull \hbox (41.83243pt too wide) in paragraph at lines 59--61
+[]\OT1/ppl/m/n/12 Reprezentarea ge-ne-ral[]a fo-lo-sit[]a pen-tru solu[]ie []^^Pn pro-blema banc-no-te-lor este: $\OML/cmm/m/it/12 banknote[] \OT1/cmr/m/n/12 :=
+ []
+
+) (chapters/chapter1.tex [3]
+Capitolul 2.
+[4
+
+]) (chapters/chapter2.tex [5]
+Capitolul 3.
+<images//verification_schema.png, id=164, 814.04124pt x 482.80376pt>
 File: images//verification_schema.png Graphic file (type png)
 <use images//verification_schema.png>
-Package pdftex.def Info: images//verification_schema.png  used on input line 46.
+Package pdftex.def Info: images//verification_schema.png  used on input line 10.
 (pdftex.def)             Requested size: 455.24411pt x 269.99991pt.
 
+Overfull \hbox (8.17963pt too wide) in paragraph at lines 21--22
+[]\OT1/ppl/m/n/12 Metoda ban-k-no-te-Mi-ni-mum este me-toda prin-ci-pal[]a fo-lo-sit[]a pen-tru a re-turna solu[]ia
+ []
 
-chapters/chapter2.tex:47: LaTeX Error: \caption outside float.
+[6
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.47         \caption
-                     {Figura 1: o schemă explicativă a apelurilor de func�...
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+ <./images//verification_schema.png>] [7] [8] [9]
+Overfull \hbox (0.53387pt too wide) in paragraph at lines 142--143
+\OT1/ppl/m/n/12 fel nu poate fi solu[]ie op-tim[]a []i se ajunge la o contradic[]ie. Precondi[]iile []i postcondi[]iile
+ []
 
-[5
+[10] [11]) (chapters/conclusions.tex [12]) (main.bbl [13
 
-] [6 <./images//verification_schema.png>] [7] [8] [9] [10] [11] [12]) (chapters/conclusions.tex [13]) (chapters/bibliography.tex [14
+]
+Underfull \hbox (badness 3657) in paragraph at lines 14--17
+[]\OT1/ppl/m/n/12 J. Niel-sen, ``How to sum con-se-cu-tive powers of 2,'' 2020.  []$\OT1/pcr/m/n/12 https : / /
+ []
 
-]) [15
+) [14
 
 ] (main.aux)
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  1672395BE2A72AEF3B41DBA4188D22E6;3361.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: F7E0B91600A41A1291F877357EF85464;3082.
  ) 
 Here is how much of TeX's memory you used:
- 12042 strings out of 476374
- 187959 string characters out of 5805258
- 2053340 words of memory out of 5000000
- 31995 multiletter control sequences out of 15000+600000
- 534571 words of font info for 85 fonts, out of 8000000 for 9000
+ 12380 strings out of 476374
+ 192270 string characters out of 5805258
+ 2044340 words of memory out of 5000000
+ 32363 multiletter control sequences out of 15000+600000
+ 536151 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,76p,856b,1952s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{C:/Miktex/fonts/enc/dvips/base/8r.enc}<C:/Miktex/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Miktex/fonts/type1/urw/courier/ucrr8a.pfb><C:/Miktex/fonts/type1/urw/palatino/uplb8a.pfb><C:/Miktex/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on main.pdf (19 pages, 244181 bytes).
+ 75i,6n,76p,856b,2019s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{C:/Miktex/fonts/enc/dvips/base/8r.enc}<C:/Miktex/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Miktex/fonts/type1/urw/courier/ucrr8a.pfb><C:/Miktex/fonts/type1/urw/palatino/uplb8a.pfb><C:/Miktex/fonts/type1/urw/palatino/uplr8a.pfb><C:/Miktex/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on main.pdf (18 pages, 263710 bytes).
 PDF statistics:
- 419 PDF objects out of 1000 (max. 8388607)
- 241 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 435 PDF objects out of 1000 (max. 8388607)
+ 197 named destinations out of 1000 (max. 500000)
+ 139 words of extra memory for PDF output out of 10000 (max. 10000000)
 

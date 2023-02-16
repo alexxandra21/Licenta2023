@@ -1,5 +1,6 @@
 \documentclass[12pt]{report}
 
+
 % includes
 \usepackage{geometry}           % page size
 \usepackage[utf8]{inputenc}     % encoding
@@ -10,9 +11,15 @@
 \usepackage{indentfirst}        % indentation
 \usepackage[nottoc]{tocbibind}  % table of contents style
 \usepackage[unicode]{hyperref}  % references from the table of contents
+\usepackage[numbers]{natbib}
+\usepackage{url}
+\usepackage{hyperref}
 
 \usepackage{listings}
 \usepackage{color}
+ 
+\bibliographystyle{ieeetr}
+
 \lstloadlanguages{[Sharp]C,C++,csh,Java}
 
 \definecolor{red}{rgb}{0.6,0,0} 
@@ -36,9 +43,29 @@
 % other options
 \linespread{1.5}                % space between lines
 \renewcommand*\contentsname{Cuprins}    % table of contents name
-
+\let\cite\citep
 % the document content
 \begin{document}
+
+
+\lstset{
+language=csh,
+basicstyle=\footnotesize\ttfamily,
+numbers=left,
+numberstyle=\tiny,
+tabsize=2,
+breaklines=true,
+frame=b,
+showspaces=false,
+showtabs=false,
+commentstyle=\color{green},
+keywordstyle=\color{mauve},
+morekeywords={lemma, method, function, predicate,ensures, requires, assert },
+identifierstyle=\color{black},
+backgroundcolor=\color{cloudwhite},
+}
+
+
     % macros (global)
     \input{front/macros}
     
@@ -61,6 +88,6 @@
     \input{chapters/chapter1}
     \input{chapters/chapter2}
     \input{chapters/conclusions}
-    \input{chapters/bibliography}
 
+\bibliography{citations}
 \end{document}

@@ -1,26 +1,67 @@
 
+
+
 \chapter{Context} 
 
- 
 Dafny este un limbaj de programare și verificare, capabil să verifice corectitudinea
-funcțională a unui program.\par
-Verificarea este posibilă datorită caracteristicilor specifice limbajului precum precondiții, postcondiții, 
+funcțională a unui program. Verificarea este posibilă datorită caracteristicilor specifice limbajului precum precondiții, postcondiții, 
 invariante, ș.a.m.d. De asemenea, verificatorul Dafny are grijă ca adnotările făcute să se îndeplinească,
-astfel acesta ne scapă de povara de a scrie cod fără erori, în schimbul scrierii de adnotări fără erori.
+astfel acesta ne scapă de povara de a scrie cod fără erori, în schimbul scrierii de adnotări fără erori.\cite{leino2010dafny}\par
+În următoarele rânduri voi arăta un exemplu de cod în Dafny ce rezolvă problema Fibonacci, menționez că următorul cod
+nu îmi aparține, ci îl voi folosi în scop explicativ. \cite{dafny:1}
+
+\begin{lstlisting}
+    function fib (n: nat) : nat
+{
+  if n == 0 then 0
+  else if n == 1 then 1
+  else fib (n-1) + fib (n-2)
+}
+
+method Fib (n: nat) returns (b: nat)
+  ensures b == fib(n);
+{
+  if (n == 0) { return 0; }
+  var a := 0;
+  b := 1;
+  
+  var i := 1;
+  while (i < n)
+    invariant i <= n
+    invariant a == fib(i-1);
+    invariant b == fib(i);
+  {
+    a, b := b, a + b;
+    i := i + 1;
+  }
+}
+\end{lstlisting}
+
+În exemplul dat putem observa cum metoda Fib are o post condiție $ensures$. Această postcondiție, dacă se verifică,
+ne asigură că metoda Fib întradevăr returnează un număr b, care este egal cu rezultatul funcției Fib, care primește ca parametru n.\par
+Dacă am fi folosit un tip de date intreg pentru n, am fi putut avea și o precondiție care să stabilească că n este mai mare decât zero.\par
+Un alt lucru specific limbajului Dafny este prezența celor trei invarianți din bucla while.
+Acești invarianți au rolul de a se asigura că sunt îndeplinite acele condiții pentru tot parcursul buclei, deoarece Dafny uită 
+de la un pas la altul ce a realizat în buclă.\par
+
+Un algoritm ce folosește \textbf{metoda greedy} face alegerea cea mai bună locală la fiecare pas, 
+construind soluția finală, astfel sperând că aceasta este soluția optimă. Această metoda generează de fiecare dată 
+o soluție mult mai bună decât soluția cea mai costisitoare, dar nu oferă soluția optimă pentru orice problemă.\par
+Exemple de probleme pentru care metoda greedy oferă soluția optimă: \par
+$\bullet$Problema de selecție a activității\par
+$\bullet$Problema bancnotelor\par
+$\bullet$Codificarea Huffman\par
  
-Problema bancnotelor are ca scop reprezentarea unei sume într-un număr minim posibil de bancnote.\par
-Metoda greedy face alegerea cea mai bună la fiecare pas, construind soluția finală.
+În cadrul acestei lucrări am ales să implementez \textbf{problema bancnotelor}. La fiecare pas se selectează 
+bancnota cea mai mare și se adaugă în soluție. Astfel reprezentăm suma primită printr-un număr minim de bancnote.\par
 Verificarea formală in Dafny a problemei bancnotelor demonstrează faptul că soluția construită este optimă
 pentru orice sumă dată ca input. \par
-Reprezentarea folosită pentru soluție este :
-$ banknote_{1}:= 1 < banknote_{2} < ... < banknote_{n} $. 
+Reprezentarea generală folosită pentru soluție în problema bancnotelor este:
+$ banknote_{1}:= 1 < banknote_{2} < ... < banknote_{n}$. 
 
-Anterior am menționat forma generală a problemei bancnotelor.\par
-Bancnotele posibile în problema bancnotelor cu $2^{5}$ sistem de bancnote sunt: 
-$[1, 2, 4, 8, 16, 32]$ . 
+Cazul particular ales pentru a fi implementat în această lucrare este problema bancnotelor în care sistemul de bancnote este format din puteri ale lui doi, 
+până la puterea a 5-a.\par
+Bancnotele posibile în problema bancnotelor cu sistemul de bancnote menționat sunt: $[1, 2, 4, 8, 16, 32]$. 
 
-Datorită bancnotelor care sunt puteri ale lui 2, dacă avem mai mult de o bancnotă de valoare mai mică decât 32,
-putem înlocui 2 bancnote de acea valoare cu o bancnotă de valoarea următoare și am obține o soluție cu cost mai mic.\par
-Astfel, am descoperit proprietatea: 
-$  forall$ $i :: 0 <= i <= 4 ==> s[i] <= 1 $
+
 

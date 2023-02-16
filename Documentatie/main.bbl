@@ -1,0 +1,29 @@
+\begin{thebibliography}{1}
+
+\bibitem{leino2010dafny}
+K.~R.~M. Leino, ``Dafny: An automatic program verifier for functional
+  correctness,'' in {\em Logic for Programming, Artificial Intelligence, and
+  Reasoning: 16th International Conference, LPAR-16, Dakar, Senegal, April
+  25--May 1, 2010, Revised Selected Papers 16}, pp.~348--370, Springer, 2010.
+
+\bibitem{dafny:1}
+S.~T.~Q. Assurance and Maintenance, ``dafny.'' Github, 2018.
+\newblock \url{https://github.com/stqam/dafny}, data accesării: 02-01-2023.
+
+\bibitem{jared:1}
+J.~Nielsen, ``How to sum consecutive powers of 2,'' 2020.
+\newblock \url{https://jarednielsen.com/sum-consecutive-powers-2/}, data
+  accesării: 23-12-2022.
+
+\bibitem{kozen1993optimal}
+D.~Kozen and S.~Zaks, ``Optimal bounds for the change-making problem,'' in {\em
+  Automata, Languages and Programming: 20th International Colloquium, ICALP 93
+  Lund, Sweden, July 5--9, 1993 Proceedings 20}, pp.~150--161, Springer, 1993.
+
+\bibitem{elisa:1}
+C.~Elisa, ``Implementarea unui algoritm de tip greedy în dafny ce rezolvă
+  problema bancnotelor.'' Github, 2022.
+\newblock \url{https://github.com/ElisaChicos/Licenta}, data accesării:
+  05-12-2022.
+
+\end{thebibliography}
