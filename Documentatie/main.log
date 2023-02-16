@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.2.7)  16 FEB 2023 05:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.2.7)  16 FEB 2023 20:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -335,7 +335,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <14.4> on input line 6.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 6.
-<images//logoFii.png, id=67, 193.47281pt x 188.95593pt>
+<images//logoFii.png, id=59, 193.47281pt x 188.95593pt>
 File: images//logoFii.png Graphic file (type png)
 <use images//logoFii.png>
 Package pdftex.def Info: images//logoFii.png  used on input line 13.
@@ -379,64 +379,95 @@ l.78     \input{front/declaration2}
 
 ]
 Capitolul 1.
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 13.
-(C:\Miktex\tex/latex/psnfss\ot1pcr.fd
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [2
 
-]
-Overfull \hbox (41.83243pt too wide) in paragraph at lines 59--61
-[]\OT1/ppl/m/n/12 Reprezentarea ge-ne-ral[]a fo-lo-sit[]a pen-tru solu[]ie []^^Pn pro-blema banc-no-te-lor este: $\OML/cmm/m/it/12 banknote[] \OT1/cmr/m/n/12 :=
+Overfull \hbox (38.56857pt too wide) in paragraph at lines 12--13
+[]\OT1/ppl/m/n/12 Reprezentarea ge-ne-ral[]a fo-lo-sit[]a pen-tru solu[]ie []^^Pn pro-blema banc-no-te-lor este: $\OML/cmm/m/it/12 banknote[] <
  []
 
-) (chapters/chapter1.tex [3]
-Capitolul 2.
-[4
+[2
 
-]) (chapters/chapter2.tex [5]
+]
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 35.
+ (C:\Miktex\tex/latex/psnfss\ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+) [3]) (chapters/chapter1.tex [4]
+Capitolul 2.
+
+Overfull \hbox (16.04755pt too wide) in paragraph at lines 11--11
+[] \OT1/ppl/b/n/17.28 Pre-di-cate fo-lo-site care ga-ran-teaz^^Ua op-ti-ma-li-ta-tea solu[]iei 
+ []
+
+[5
+
+]) (chapters/chapter2.tex [6]
 Capitolul 3.
-<images//verification_schema.png, id=164, 814.04124pt x 482.80376pt>
+
+Overfull \hbox (8.48016pt too wide) in paragraph at lines 5--6
+[][]\OT1/ppl/m/n/12 In urm[]atoarea schem[]a voi exem-pli-fica mo-dul []^^Pn care se ape-leaz[]a me-to-dele, func[]iile
+ []
+
+<images//verification_schema.png, id=174, 814.04124pt x 482.80376pt>
 File: images//verification_schema.png Graphic file (type png)
 <use images//verification_schema.png>
-Package pdftex.def Info: images//verification_schema.png  used on input line 10.
+Package pdftex.def Info: images//verification_schema.png  used on input line 11.
 (pdftex.def)             Requested size: 455.24411pt x 269.99991pt.
 
-Overfull \hbox (8.17963pt too wide) in paragraph at lines 21--22
+Overfull \hbox (8.17963pt too wide) in paragraph at lines 17--18
 []\OT1/ppl/m/n/12 Metoda ban-k-no-te-Mi-ni-mum este me-toda prin-ci-pal[]a fo-lo-sit[]a pen-tru a re-turna solu[]ia
  []
 
-[6
+[7
 
- <./images//verification_schema.png>] [7] [8] [9]
-Overfull \hbox (0.53387pt too wide) in paragraph at lines 145--146
-\OT1/ppl/m/n/12 fel nu poate fi solu[]ie op-tim[]a []i se ajunge la o contradic[]ie. Precondi[]iile []i postcondi[]iile
+ <./images//verification_schema.png>] [8] [9] [10] [11]
+Overfull \hbox (12.59608pt too wide) in paragraph at lines 161--170
+[]\OT1/ppl/m/n/12 Lema este si-mi-lar[]a cu ban-k-no-te-Ma-xim, doar c[]a este spe-ci-fic[]a banc-no-tei nem[]arginite,
  []
 
-[10] [11] [12]) (chapters/conclusions.tex [13]) (main.bbl [14
+[12] [13]
+Overfull \hbox (11.64728pt too wide) in paragraph at lines 207--207
+[]\OT1/ppl/m/n/12 Consider[]am c[]a exist[]a o alt[]a solu[]ie op-tim[]a pen-tru rest, nu-mit[]a op-ti-mal-So-lu-tion(linia
+ []
+
+
+Overfull \hbox (5.71982pt too wide) in paragraph at lines 209--211
+[]\OT1/ppl/m/n/12 Verific[]am []^^Pn pre-su-pusa solu[]ie pen-tru rest c[]a nu avem banc-nota []^^Pn solu[]ie deja(linia
+ []
+
+[14] [15]
+Overfull \hbox (11.19246pt too wide) in paragraph at lines 286--287
+[][]\OT1/ppl/m/n/12 In lema ex-chan-geAr-gu-ment32 pre-su-pu-nem c[]a solu[]ia nu este op-tim[]a dac[]a adaug[]am
+ []
+
+
+Overfull \hbox (11.64728pt too wide) in paragraph at lines 288--288
+[]\OT1/ppl/m/n/12 Consider[]am c[]a exist[]a o alt[]a solu[]ie op-tim[]a pen-tru rest, nu-mit[]a op-ti-mal-So-lu-tion(linia
+ []
+
+[16]) (chapters/conclusions.tex [17]) (main.bbl [18
 
 ]
 Underfull \hbox (badness 3657) in paragraph at lines 14--17
 []\OT1/ppl/m/n/12 J. Niel-sen, ``How to sum con-se-cu-tive powers of 2,'' 2020.  []$\OT1/pcr/m/n/12 https : / /
  []
 
-) [15
+) [19
 
 ] (main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: F7E0B91600A41A1291F877357EF85464;3082.
+(rerunfilecheck)             Checksum: 26F1390F8503B71EEF4C25C248736BC9;2588.
  ) 
 Here is how much of TeX's memory you used:
- 12381 strings out of 476374
- 192277 string characters out of 5805258
- 2053340 words of memory out of 5000000
- 32363 multiletter control sequences out of 15000+600000
+ 12470 strings out of 476374
+ 193612 string characters out of 5805258
+ 2031340 words of memory out of 5000000
+ 32365 multiletter control sequences out of 15000+600000
  536151 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,76p,856b,2019s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,6n,76p,856b,1952s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {C:/Miktex/fonts/enc/dvips/base/8r.enc}<C:/Miktex/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Miktex/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Miktex/fonts/type1/urw/courier/ucrr8a.pfb><C:/Miktex/fonts/type1/urw/palatino/uplb8a.pfb><C:/Miktex/fonts/type1/urw/palatino/uplr8a.pfb><C:/Miktex/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (19 pages, 264523 bytes).
+Output written on main.pdf (23 pages, 286204 bytes).
 PDF statistics:
- 440 PDF objects out of 1000 (max. 8388607)
- 198 named destinations out of 1000 (max. 500000)
- 139 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 550 PDF objects out of 1000 (max. 8388607)
+ 285 named destinations out of 1000 (max. 500000)
+ 123 words of extra memory for PDF output out of 10000 (max. 10000000)
 

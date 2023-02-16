@@ -1,35 +1,44 @@
 \chapter{Implementarea problemei în Dafny}
 
 
-\section{ Reprezentarea datelor de intrare }
-În cazul problemei discutate datele de intrare sunt reprezentate de \textbf{suma} 
+\section{ Reprezentarea datelor de intrare și ieșire }
+În cazul problemei discutate datele de intrare sunt reprezentate de un număr natural \textbf{sum} 
 pentru care se verifică dacă se produce soluția finală optimă.
 
-\section{ Reprezentarea datelor de ieșire}
-Drept date de ieșire avem soluția de cost minim reprezentată de secvența: \par
-$\bullet$ soluție  = { $b_{0}, b_{1}, b_{2}, b_{3}, b_{4}, b_{5}$} , unde $\sum_{k=0}^{5} b_{k} \cdot 2^{k} = suma $ \cite{jared:1}
+Drept date de ieșire avem soluția de cost minim reprezentată de secvența formată din 6 numere naturale: \par
+$\bullet$ soluție  = { $b_{0}, b_{1}, b_{2}, b_{3}, b_{4}, b_{5}$} , unde $\sum_{k=0}^{5} b_{k} \cdot 2^{k} = suma $ ~\cite{jared:1}.
 
-\section{ Structuri de date folosite}
+\section{ Predicate folosite care garantează optimalitatea soluției}
 Soluția este reprezentată ca o secvență de numere naturale, fiind chiar secvența descrisă la secțiunea date de ieșire.
-Fiecare element din soluție reprezintă numărul de apariții ale bancnotei corespunzătoare în soluție. 
+Fiecare element din soluție reprezintă numărul de apariții ale bancnotei corespunzătoare în soluție.\par
+Entry point-ul verificării  problemei este metoda banknoteMinimum, care asigură faptul că soluția returnată este optimă.
 
-\subsection{Condiții ca o soluție finală să fie optimă}
 $\bullet$ \textbf{predicatul isValidSolution}: Pentru a fi soluție optimă trebuie ca secvența să fie o soluție validă (cu 6 elemente), 
 care produce suma corectă și care are costul cel mai mic.\par
-$\bullet$ \textbf{predicatul isSolution}: Pentru a fi soluție trebuie ca secvența să fie o soluție validă (cu 6 elemente) și
-să producă suma corectă.\par
-$\bullet$ \textbf{predicatul isValidSolution}: Pentru a fi soluție validă trebuie ca secvența să aibă 6 elemente (tipuri de bancnote), cu 
-proprietatea că fiecare bancnotă are un număr nul sau pozitiv de apariții în soluție.\par
-$\bullet$ \textbf{invariant}:Acest invariant, care apare mai jos, se asigură că 
-nu avem în soluția optimă mai mult de o bancnotă de valoarea 1, 2, 4, 8 sau 16, deoarece aparițiile multiple ale acestora pot fi
-înlocuite cu o bancnotă superioară pentru optimalitate(2 bancnote de valoare 1 au costul mai mare decât o bancnotă de valoare 2).\par
 \begin{lstlisting}
-    invariant forall index :: 4 >= index >= i ==> optimalSolution[index] <= 1
+predicate isValidSolution(solution: seq < int > ) 
+{
+  hasSixElem(solution) && solution[0] >= 0 && solution[1] >= 0 && solution[2] >= 0 && solution[3] >= 0 && solution[4] >= 0 && solution[5] >= 0
+}
 \end{lstlisting}
 
-$\bullet$ \textbf{predicatul addOptimRestEqualsOptimSum}: Acest predicat are rolul de a verifica dacă o soluție pentru suma $x$ 
-adunată cu o soluție optimă pentru suma $y$ are ca rezultat o soluție optimă pentru $x+y$. Acest lucru ne ajută să verificăm 
-optimalitatea unei soluții fără să fie necesară optimalitatea ambelor soluții ce o formează.\par
-Scopul acestor predicate este de a asigura că secvența ce reprezintă datele de ieșire respectă toate condițiile necesare
-pentru a fi considerată soluție optimă.
-    
+$\bullet$ \textbf{predicatul isSolution}: Pentru a fi soluție trebuie ca secvența să fie o soluție validă (cu 6 elemente) și
+să producă suma corectă.\par
+\begin{lstlisting}
+predicate isSolution(solution: seq < int > , sum: int)
+  requires isValidSolution(solution) 
+{
+  solutionElementsSum(solution) == sum
+}
+\end{lstlisting}
+
+$\bullet$ \textbf{predicatul isValidSolution}: Pentru a fi soluție validă trebuie ca secvența să aibă 6 elemente (tipuri de bancnote), cu 
+proprietatea că fiecare bancnotă are un număr nul sau pozitiv de apariții în soluție.\par
+\begin{lstlisting}
+predicate isOptimalSolution(solution: seq < int > , sum: int)
+  requires isValidSolution(solution) 
+{
+  isSolution(solution, sum) &&
+    forall possibleSolution::isValidSolution(possibleSolution) && isSolution(possibleSolution, sum) ==> cost(possibleSolution) >= cost(solution)
+}
+\end{lstlisting}

@@ -1,17 +1,39 @@
 
-
-
 \chapter{Context} 
 
-Dafny este un limbaj de programare și verificare, capabil să verifice corectitudinea
+ 
+În cadrul acestei lucrări am ales să implementez și să verific formal algoritmul greedy pentru \textbf{problema bancnotelor}. La fiecare pas se selectează 
+bancnota cea mai mare și se adaugă în soluție. Astfel reprezentăm suma primită printr-un număr minim de bancnote.\par
+
+Problema bancnotelor la intrare primește un număr natural ce reprezintă o sumă și o rezervă infinită de bancnote de valori nominale predefinite, 
+în funcție de cazul particular ales. Problema determină numărul minim posibil de bancnote în care putem reprezenta
+restul de valoarea sumei. La iesire, problema returnează o secvență formată din numerele corespunzătoare aparițiilor 
+fiecărei bancnote.\par
+Reprezentarea generală folosită pentru soluție în problema bancnotelor este:
+$ banknote_{1} < banknote_{2} < ... < banknote_{n}$, unde dacă $ banknote_{1} = x$, avem x bancnote de valoare 1.\par
+Cazul particular ales pentru a fi implementat în această lucrare este problema bancnotelor în care sistemul de bancnote este format din puteri ale lui doi, 
+până la puterea a 5-a $(2^0, 2^1, 2^2, 2^3, 2^4, 2^5)$.\par
+Bancnotele posibile în problema bancnotelor cu sistemul de bancnote menționat sunt: $[1, 2, 4, 8, 16, 32]$. 
+
+Un algoritm ce folosește \textbf{metoda greedy} face alegerea cea mai bună locală la fiecare pas, 
+construind soluția finală, astfel sperând că aceasta este soluția optimă. Această metoda generează de fiecare dată 
+o soluție mult mai bună decât soluția cea mai costisitoare, dar nu oferă soluția optimă pentru orice problemă.\par
+Exemple de probleme pentru care metoda greedy oferă soluția optimă: \par
+$\bullet$Problema de selecție a activității\par
+$\bullet$Problema bancnotelor\par
+$\bullet$Codificarea Huffman\par
+
+Verificarea formală in Dafny a algoritmului greedy care rezolvă problema bancnotelor demonstrează faptul că soluția construită este optimă
+pentru orice sumă dată ca input. \par
+Dafny este un limbaj de programare și verificare, care poate verifica corectitudinea
 funcțională a unui program. Verificarea este posibilă datorită caracteristicilor specifice limbajului precum precondiții, postcondiții, 
-invariante, ș.a.m.d. De asemenea, verificatorul Dafny are grijă ca adnotările făcute să se îndeplinească,
-astfel acesta ne scapă de povara de a scrie cod fără erori, în schimbul scrierii de adnotări fără erori.\cite{leino2010dafny}\par
-În următoarele rânduri voi arăta un exemplu de cod în Dafny ce rezolvă problema Fibonacci, menționez că următorul cod
-nu îmi aparține, ci îl voi folosi în scop explicativ. \cite{dafny:1}
+invariante, ș.a.m.d. De asemenea, verificatorul Dafny se asigură că adnotările făcute se îndeplinesc,
+astfel acesta nu se așteaptă la scrierea unui cod fără erori, ci la scrierea unor adnotări fără erori.~\cite{leino2010dafny}\par
+În următoarele rânduri voi explica pe scurt cum funcționează Dafny, folosind un exemplu simplu de cod preluat dintr-un repository public de pe Github, care 
+rezolvă problema Fibonacci.~\cite{dafny:1}.
 
 \begin{lstlisting}
-    function fib (n: nat) : nat
+function fib (n: nat) : nat
 {
   if n == 0 then 0
   else if n == 1 then 1
@@ -40,28 +62,8 @@ method Fib (n: nat) returns (b: nat)
 În exemplul dat putem observa cum metoda Fib are o post condiție $ensures$. Această postcondiție, dacă se verifică,
 ne asigură că metoda Fib întradevăr returnează un număr b, care este egal cu rezultatul funcției Fib, care primește ca parametru n.\par
 Dacă am fi folosit un tip de date intreg pentru n, am fi putut avea și o precondiție care să stabilească că n este mai mare decât zero.\par
-Un alt lucru specific limbajului Dafny este prezența celor trei invarianți din bucla while.
-Acești invarianți au rolul de a se asigura că sunt îndeplinite acele condiții pentru tot parcursul buclei, deoarece Dafny uită 
-de la un pas la altul ce a realizat în buclă.\par
-
-Un algoritm ce folosește \textbf{metoda greedy} face alegerea cea mai bună locală la fiecare pas, 
-construind soluția finală, astfel sperând că aceasta este soluția optimă. Această metoda generează de fiecare dată 
-o soluție mult mai bună decât soluția cea mai costisitoare, dar nu oferă soluția optimă pentru orice problemă.\par
-Exemple de probleme pentru care metoda greedy oferă soluția optimă: \par
-$\bullet$Problema de selecție a activității\par
-$\bullet$Problema bancnotelor\par
-$\bullet$Codificarea Huffman\par
- 
-În cadrul acestei lucrări am ales să implementez \textbf{problema bancnotelor}. La fiecare pas se selectează 
-bancnota cea mai mare și se adaugă în soluție. Astfel reprezentăm suma primită printr-un număr minim de bancnote.\par
-Verificarea formală in Dafny a problemei bancnotelor demonstrează faptul că soluția construită este optimă
-pentru orice sumă dată ca input. \par
-Reprezentarea generală folosită pentru soluție în problema bancnotelor este:
-$ banknote_{1}:= 1 < banknote_{2} < ... < banknote_{n}$. 
-
-Cazul particular ales pentru a fi implementat în această lucrare este problema bancnotelor în care sistemul de bancnote este format din puteri ale lui doi, 
-până la puterea a 5-a.\par
-Bancnotele posibile în problema bancnotelor cu sistemul de bancnote menționat sunt: $[1, 2, 4, 8, 16, 32]$. 
-
+Un alt lucru specific limbajului Dafny este prezența celor trei invarianți din bucla while(liniile 17, 18, 19).
+Acești invarianți au rolul de a se asigura că sunt îndeplinite acele condiții pentru tot parcursul buclei, deoarece Dafny 
+nu poate demonstra de la o iterație la alta ce s-a realizat în buclă.\par
 
 
